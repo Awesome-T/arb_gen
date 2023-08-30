@@ -3,7 +3,7 @@ import 'types_of_content.dart';
 ///
 ///
 ///
-extension MapCasting on MapEntry<String, DTArb<dynamic>> {
+extension MapCast on MapEntry<String, DTArb<dynamic>> {
   ///
   ///
   ///
