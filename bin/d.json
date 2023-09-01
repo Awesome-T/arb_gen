@@ -1,0 +1,147 @@
+{
+    "@@locale": "it",
+    "appName": "Demo app",
+    "pageLoginUsername": "Il tuo nome utente",
+    "@pageLoginUsername": {},
+    "pageLoginPassword": "La tua password",
+    "@pageLoginPassword": {},
+    "pageHomeTitle": "Benvenuto {firstName}",
+    "@pageHomeTitle": {
+        "description": "Welcome message on the Home screen",
+        "placeholders": {
+            "firstName": {}
+        }
+    },
+    "pageHomeInboxCount": "{count,plural, zero{Non hai nuovi messaggi} one{Hai 1 nuovo messaggio} other{Hai {count} nuovi messaggi}}",
+    "@pageHomeInboxCount": {
+        "description": "New messages count on the Home screen",
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "pageHomeBirthday": "{sex, select, male{Il suo compleanno} female{Il suo compleanno} other{Il loro compleanno}}",
+    "@pageHomeBirthday": {
+        "description": "Birthday message on the Home screen",
+        "placeholders": {
+            "sex": {}
+        }
+    },
+    "commonVehicleType": "{vehicleType, select, sedan{Berlina} cabriolet{Cabriolet con tetto solido} truck{Carrello a 16 ruote} other{Altro}}",
+    "@commonVehicleType": {
+        "description": "Vehicle type",
+        "placeholders": {
+            "vehicleType": {}
+        }
+    },
+    "pageHomeBalance": "Il tuo saldo è di {amount} il {date}",
+    "@pageHomeBalance": {
+        "placeholders": {
+            "amount": {
+                "type": "double",
+                "format": "currency",
+                "example": "$1000.00",
+                "description": "Account balance",
+                "optionalParameters": {
+                    "decimalDigits": 2,
+                    "name": "USD",
+                    "symbol": "$",
+                    "customPattern": "¤#0.00"
+                }
+            },
+            "date": {
+                "type": "DateTime",
+                "format": "yMd",
+                "example": "11/10/2021",
+                "description": "Balance date"
+            }
+        }
+    },
+    "commonCustomDateFormat": "Formato data personalizzato: {date}",
+    "@commonCustomDateFormat": {
+        "placeholders": {
+            "date": {
+                "type": "DateTime",
+                "format": "EEE, M/d/y",
+                "isCustomDateFormat": "true"
+            }
+        }
+    },
+    "productCostInfo": "Costo: {cost}",
+    "@productCostInfo": {
+        "placeholders": {
+            "cost": {
+                "type": "double",
+                "format": "currency",
+                "optionalParameters": {
+                    "symbol": "€",
+                    "decimalDigits": 3
+                }
+            }
+        }
+    },
+    "postCreatedInfo": "Data di Creazione}",
+    "@postCreatedInfo": {
+        "placeholders": {
+            "date": {
+                "type": "DateTime",
+                "format": "MMMd"
+            }
+        }
+    },
+    "roomUnavailableContactOrganiserDialogCount": "{count,plural, =1{un organizzatore} other{organizzatori}}",
+    "@roomUnavailableContactOrganiserDialogCount": {
+        "placeholders": {
+            "count": {}
+        }
+    },
+    "singleString": "Questa è solo una stringa normale.",
+    "@singleString": {
+        "context": "views:Home page",
+        "description": "Comment for the single string."
+    },
+    "datePickerMinuteOne": "1 minuto",
+    "datePickerMinuteOther": "$minuto minuti",
+    "@datePickerMinute": {
+        "description": "Accessibility announcement for the selected minute on a time picker such as '15 minutes' or '15分'",
+        "plural": "minute",
+        "placeholders": {
+            "minute": {
+                "description": "the number of minutes",
+                "example": "15"
+            }
+        }
+    },
+    "contactDetailsPopupEmailCopiedMessage": "Copiato {email} negli appunti",
+    "@contactDetailsPopupEmailCopiedMessage": {
+        "description": "Message being displayed in a snackbar upon long-clicking email in contact details popup",
+        "placeholders": {
+            "email": {
+                "type": "String",
+                "example": "example@gmail.com"
+            }
+        }
+    },
+    "formLabelDone": "Fatto",
+    "@formLabelDone": {
+        "description": "Label being displayed below every form field that is filled and valid"
+    },
+    "pageHomeWelcomeRole": "{role, select, admin{Ciao amministratore!} manager{Ciao direttore!} other{Ciao visitatore!}}",
+    "delete_shopping_list_dialog_body": "Vuoi davvero eliminare la lista della spesa di {list_name}? Questa operazione non può essere annullata.",
+    "@delete_shopping_list_dialog_body": {
+        "placeholders": {
+            "list_name": {
+                "type": "String",
+                "example": "Groceries"
+            }
+        }
+    },
+    "remove_all_done_dialog_body": "{count,plural, =1{Sei sicuro di voler rimuovere 1 articolo? Questa operazione non può essere annullata.} other{Sei sicuro di voler rimuovere tutti i {count} elementi? Questa operazione non può essere annullata.}}",
+    "@remove_all_done_dialog_body": {
+        "placeholders": {
+            "count": {
+                "type": "int",
+                "format": "compactLong"
+            }
+        }
+    }
+}

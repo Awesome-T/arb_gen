@@ -1,0 +1,1 @@
+const LANGS = {"en":{"English":"English"},"it":{"Italian":"Italiano"}};
