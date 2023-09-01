@@ -77,7 +77,7 @@ abstract class _IParset<T extends DTArb<dynamic>> {
     // final f = arr
     //   ..removeLast()
     //   ..add(last);
-    //   print(data);
+    //   stdout.write(data);
 
     // Используем регулярное выражение для поиска строк, которые
     // начинаются с пробелов и заканчиваются новой строкой
@@ -89,7 +89,7 @@ abstract class _IParset<T extends DTArb<dynamic>> {
     }
     // Извлекаем строки из совпадений
     // Выводим результат
-    //  print(result.toString());
+    //  stdout.write(result.toString());
     //.replaceAll(r'\n', replace)
     // final arrw = data.split(separator)..removeLast();
     return result;

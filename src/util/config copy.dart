@@ -1,4 +1,4 @@
-// // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_print, constant_identifier_names, lines_longer_than_80_chars
+// // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_stdout.write, constant_identifier_names, lines_longer_than_80_chars
 // import 'dart:io';
 // import 'package:collection/collection.dart';
 // import 'constraints.dart';
@@ -102,7 +102,7 @@
 //   static void chechNameOfOutClass() {
 //     if (outputClass != null && !RegExp(r'^[a-zA-Z\D]{1}[_AZaz\S\d+]{0,}$', unicode: true).hasMatch(outputClass!)) {
 //       final msg = '`outputClass` name $outputClass is incorrect';
-//       print(msg);
+//       stdout.write(msg);
 //       throw ConfigArgException(msg);
 //     }
 //   }
@@ -113,7 +113,7 @@
 //   static void checkPathToFile(String pathToFile) {
 //     if (!RegExp(r'.*\.(JSON|json|arb|ARB)$', unicode: true).hasMatch(pathToFile)) {
 //       final msg = 'extesion must be .json or .arb $pathToFile';
-//       print(msg);
+//       stdout.write(msg);
 //       throw FileSystemException(msg);
 //     }
 //   }
@@ -123,7 +123,7 @@
 //   static void checkArbName() {
 //     if (!RegExp(r'^[a-zA-Z]{1,}$', unicode: true).hasMatch(arbName)) {
 //       final msg = 'name of file  is not correct $arbName';
-//       print(msg);
+//       stdout.write(msg);
 //       throw ConfigArgException(msg);
 //     }
 //   }
@@ -134,7 +134,7 @@
 //     final notEqual = apiKey.runtimeType != translater.runtimeType;
 //     if (notEqual) {
 //       const msg = 'Both properties (apiKey and translater) must be specified or be null.';
-//       print(msg);
+//       stdout.write(msg);
 //       throw const ConfigArgException(msg);
 //     }
 //   }
@@ -146,13 +146,13 @@
 //     if (isNotConfirmCodes) {
 //       final notSypportedCodes = translateTo.whereNot(suppurtedLangCodes.contains).toList();
 //       final msg = 'Exeprion: some language codes are wrong : $notSypportedCodes';
-//       print(msg);
+//       stdout.write(msg);
 //       throw ConfigArgException(msg);
 //     }
 //     //
 //     if (baseLanguage != null && !suppurtedLangCodes.contains(baseLanguage)) {
 //       final msg = 'Error baseLanguage: $baseLanguage  is not valid';
-//       print(msg);
+//       stdout.write(msg);
 //       throw ConfigArgException(msg);
 //     }
 //     //
@@ -162,13 +162,13 @@
 //           ? msg =
 //               'Error preferredLanguage: $preferredLanguage  is not valid and this code must be in `translateTo` array'
 //           : msg = 'Error preferredLanguage: $preferredLanguage must be in `translateTo` array';
-//       print(msg);
+//       stdout.write(msg);
 //       throw ConfigArgException(msg);
 //     }
 //     //
 //     if (translateTo.isEmpty) {
 //       const msg = 'key translateTo not exist or values is null';
-//       print(msg);
+//       stdout.write(msg);
 //       throw const ConfigArgException(msg);
 //     }
 //   }
@@ -419,8 +419,8 @@
 //   //     .toList()
 //   //     .map((e) => jsonEncode(e))
 //   //     .toList();
-//   // print("Различия в языковых кодах:");
-//   // print(differences);
+//   // stdout.write("Различия в языковых кодах:");
+//   // stdout.write(differences);
 // }
 
 // ///

@@ -376,7 +376,7 @@ toSingleStr()
 //       }
 
 //       // var f = plural.separeteTranslation(buff.toString()).length;
-//       // print(plural.separeteTranslation(buff.toString()).toList());
+//       // stdout.write(plural.separeteTranslation(buff.toString()).toList());
 //       final tr = plural.separeteTranslation(buff.toString()).toList()..removeLast();
 //       expect(
 //         (tr.length) == fakeParsedArb.values.first.source.length,

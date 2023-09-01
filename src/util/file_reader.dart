@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+
 ///
 ///
 ///
@@ -18,7 +19,7 @@ abstract interface class IFileReader {
 
 ///
 ///
-class FileReader  implements IFileReader{
+class FileReader implements IFileReader {
   const FileReader();
 
   ///
@@ -26,7 +27,7 @@ class FileReader  implements IFileReader{
   /// create translation .arb
   ///
   ///
-   @override
+  @override
   Future<void> createArb(
     String outputFolder,
     String langCode,
@@ -36,18 +37,25 @@ class FileReader  implements IFileReader{
       File('$outputFolder/${arbName}_$langCode.arb')
           .create(recursive: true)
           .then(
-            (File value) => value.writeAsString(jsonEncode(contents)).then((File file) {
-              print('file created ${file.path}');
-              return;
-            }).onError<FileSystemException>((error, stackTrace) => throw error),
+            (File value) => value.writeAsString(jsonEncode(contents)).then(
+              (file) {
+                print('file created ${file.path}');
+                //   stdout.write('file created ${file.path}');
+                return;
+              },
+            ).onError<FileSystemException>((error, stackTrace) => throw error),
           )
-          .onError<PathExistsException>((error, stackTrace) => throw error);
+          .onError<PathExistsException>((error, stackTrace) {
+        stderr.write('error $error');
+        //   stdout.ite('file created ${file.path}');
+        throw error;
+      });
 
   /// Interface which returns content file for builder
   /// and configuration for this
   /// part `arb.gen/config.json`
   /// [String path = 'arb.gen/config.json']
-   @override
+  @override
   Map<String, dynamic> loadMapFromFile(String path) {
     try {
       final file = File(path);

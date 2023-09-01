@@ -51,7 +51,7 @@ class ClientHttp implements IHttpClient {
       final responseBody = await response.transform(utf8.decoder).join();
       return responseBody;
     } catch (e) {
-      print('message $e');
+      stdout.write('message $e');
       throw Exception('Error $e');
     } finally {
       httpClient.close();
@@ -82,7 +82,7 @@ class ClientHttp implements IHttpClient {
 
       if (response.statusCode == HttpStatus.ok) return responseBody;
       final msg = 'Error: ${response.statusCode} ${response.reasonPhrase}';
-      print(msg);
+      stdout.write(msg);
       throw HttpException(msg);
     } on io.SocketException catch (e) {
       throw io.SocketException('$e');

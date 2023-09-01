@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import '../util/errors.dart';
 import 'i_innerparser.dart';
 import 'i_parser.dart';
@@ -168,7 +170,7 @@ class PluralInnerParser implements IInnerParser {
     if (!hasOtherKeyword) {
       final msg =
           '''Exception: key ${fd.keys.toList()} - argument option must have `${otherKyeWord.toLowerCase()}` keyword clause ''';
-      print(msg);
+      stdout.write(msg);
       throw IcuParsingException(msg);
     }
   }

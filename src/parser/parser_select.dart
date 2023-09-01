@@ -1,5 +1,7 @@
 // ignore_for_file: directives_ordering, lines_longer_than_80_chars
 
+import 'dart:io';
+
 import 'i_innerparser.dart';
 import 'i_parser.dart';
 import 'types_of_content.dart';
@@ -69,14 +71,14 @@ base class SelectPaser extends IParset<SelectArb> {
       final translatedArbKey = '{${parsedChank.placeholders?.first}, ${IcuKeyWord.select.name},$toVariants}';
       // *
 
-//       print('''
+//       stdout.write('''
 // $runtimeType
 // $keys
 // $counVariants
 // placeholders
 // $translatedSublist
 // ''');
-//           print('''
+//           stdout.write('''
 // $runtimeType
 // translatedChank ${translatedChank.length}
 // ''');
@@ -86,7 +88,7 @@ base class SelectPaser extends IParset<SelectArb> {
           : translatedChank.removeRange(0, parsedChank.source.entries.length);
       return result;
     } on IcuParsingException catch (e) {
-      // print('Error $e');
+      // stdout.write('Error $e');
       throw IcuParsingException('$e');
     }
   }
@@ -131,7 +133,7 @@ base class SelectPaser extends IParset<SelectArb> {
         return result;
       }
     } on IcuParsingException catch (e) {
-      //   print('Exception $e\n$tr');
+      //   stdout.write('Exception $e\n$tr');
       throw IcuParsingException('$e');
     } on FormatException catch (e) {
       throw FormatException('$e');
@@ -167,7 +169,7 @@ class SelectInnerParser implements IInnerParser {
       return result;
     } on FormatException catch (e) {
       const msg = '''FormatException: does not follow valid regular expression syntax.''';
-      print(msg);
+      stdout.write(msg);
       throw FormatException('$e');
     }
     // final List<String> values = RegExp(r'{(.*?)}')
@@ -190,7 +192,7 @@ class SelectInnerParser implements IInnerParser {
     if (!hasOtherKeyword) {
       final msg =
           '''Exception: key ${map.keys.toList()} - argument option must have `${otherKyeWord.toLowerCase()}` keyword clause\b$map''';
-      print(msg);
+      stdout.write(msg);
       throw IcuParsingException(msg);
     }
   }

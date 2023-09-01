@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:convert' show jsonDecode;
+import 'dart:io';
 
 import '../i_translator.dart';
 
@@ -46,7 +47,7 @@ class GoogleTS extends ServiceTranslator {
 
     if (arrays == null) {
       const message = "Error: Can't parse json data";
-      print(message);
+      stdout.write(message);
       throw const FormatException(message);
     }
 

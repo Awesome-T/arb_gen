@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_stdout.write
 import 'dart:convert';
 import 'dart:io';
 import 'package:collection/collection.dart';
@@ -45,12 +45,12 @@ Future<void> createL10nyaml(
               ),
             )
                 .then((_) {
-              print('File l10n.yaml created');
+              stdout.write('File l10n.yaml created');
               return;
             }),
           )
           .onError((error, stackTrace) {
-        print('''
+        stdout.write('''
 File l10n.yaml ERROR $error
 ''');
         return;
@@ -62,7 +62,7 @@ File l10n.yaml ERROR $error
     final msg = '''
 Exception l10n.yaml NOT CREATEDm$e
 ''';
-    print(msg);
+    stdout.write(msg);
     throw Exception(msg);
   }
 }
@@ -98,21 +98,21 @@ Future<void> upgradePubspec() async {
         if (lines[a] == '''    sdk: flutter''') {
           if (!hasLocalization && !hasIntl) {
             lines.insert(a + 1, _StringsSo.allDependencies);
-            print('''
+            stdout.write('''
 Added intl and flutter_localizations packages
 ''');
             break;
           }
           if (!hasIntl) {
             lines.insert(a + 1, _StringsSo.inplPakage);
-            print('''
+            stdout.write('''
 Added intl package
 ''');
             break;
           }
           if (!hasLocalization) {
             lines.insert(a + 1, _StringsSo.localizationPack);
-            print('''
+            stdout.write('''
 Added flutter_localizations package
 ''');
             break;
@@ -134,7 +134,7 @@ Added flutter_localizations package
   final isNotTheSame = !const IterableEquality().equals(origennArray, lines);
 
   if (isNotTheSame) {
-    print('''
+    stdout.write('''
 UPDATING pubspec.yaml
 ''');
     final buf = StringBuffer();
@@ -147,7 +147,7 @@ UPDATING pubspec.yaml
   }
   //
   else {
-    print('''
+    stdout.write('''
 no need to UPDATING pubspec.yaml
 ''');
     return;
@@ -172,7 +172,7 @@ Future<bool> runFlutterPubGet() async {
         result.exitCode,
       );
     }
-    print('flutter pub get was finised all files');
+    stdout.write('flutter pub get was finised all files');
     return true;
   });
 }
@@ -196,13 +196,15 @@ Future<void> moveFolderAndFiles(String outPutFolder) async {
       if (file.path.endsWith('.yaml')) continue;
       final newPath = '${targetDirectory.path}/${file.uri.pathSegments.last}';
       file.renameSync(newPath);
-      print('''
-File ${file.uri.pathSegments.last} was moved into $newPath
+      stdout.write('''
+File ${file.uri.pathSegments.last} was moved 
+into $newPath
 ''');
     }
     await sourceDirectory.delete(recursive: true);
-    print('''
-Dorectory delited ${sourceDirectory.path}
+    stdout.write('''
+Dorectory delited 
+${sourceDirectory.path}
 ''');
   } on PathNotFoundException catch (e) {
     throw PathNotFoundException('$e\n$outPutFolder', const OSError());
@@ -213,19 +215,16 @@ Dorectory delited ${sourceDirectory.path}
 ///
 ///
 String createMapWithLangs(List<String> langs) {
-  //  LANGS.entries.map((i) => null);
-  // final ds = langs.map((i) => LANGS.entries.singleWhere((e) => e.key == i));
-  // final dss = Map<String, Map<String, String>>.fromEntries(ds);
+//
   final tr = Map<String, Map<String, String>>.fromEntries(
     LANGS.entries.where((e) => langs.contains(e.key)),
   );
 
   final jsonString = jsonEncode(tr);
-  // print(jsonString);
   final file = File('${Directory.current.path}/lib/arb.langs.dart')
     ..createSync()
     ..writeAsStringSync('const LANGS = $jsonString;');
-  print(file.path);
+  stdout.write(file.path);
   return file.path;
 }
 
@@ -240,40 +239,40 @@ class _StringsSo {
   intl:''';
 
   static const String inplPakage = '''  intl:''';
-///
+
+  ///
   static const String localizationPack = '''
   flutter_localizations:
     sdk: flutter''';
-///
+
+  ///
   static const String geterate = '''  generate: true''';
 
   ///
-  /// creating `l10n.yaml` file
+  /// lDirName `localization.dart` file
   ///
   ///
   static String l10nFile1(
     String arbName,
     String langCode,
     String? outputClass,
-    String lDirName,
+    String className,
     String? preferredLanguage,
   ) {
     final s = '''
-  # The directory where the template and 
-  # translated arb files are located.The default is lib/l10n.
+  # The directory where the template and translated arb files are located.The default is lib/l10n.
   arb-dir: lib/l10n
   template-arb-file: ${arbName}_$langCode.arb
   output-class: ${outputClass ?? r'$L'}
   # synthetic_package: false
   # Specifies whether the localizations class getter is nullable.
   nullable-getter: false
-  # When specified, the dart format command is run after 
-  # generating the localization files.
+  # When specified, the dart format command is run after generating the localization files.
   format: true
   # untranslated-messages-file: untranslated.json
   use-deferred-loading: false
   # output-localization-file: l10n.dart
-  output-localization-file: $lDirName.dart''';
+  output-localization-file: $className.g.dart''';
     final b = '''\n  preferred-supported-locales:\n    - $preferredLanguage''';
     if (preferredLanguage != null) {
       return s + b;

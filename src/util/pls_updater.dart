@@ -117,7 +117,7 @@ $str
         ..createSync()
         ..writeAsStringSync(buff.toString());
       buff.clear();
-      print('''File ${file.path} was updated successfully''');
+      stdout.write('''File ${file.path} was updated successfully''');
     } on FileSystemException catch (e) {
       throw FileSystemException('$e');
     } on Exception catch (e) {

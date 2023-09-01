@@ -72,10 +72,13 @@ Future<void> main(List<String> arguments) async {
   // * [6] Completion Message:
   final d = sWatch.elapsed;
   sWatch.stop();
-  print('''--------------COMPLITE--------------
-  it took  ${(d.inMilliseconds * 0.001).toStringAsFixed(2)} sec.
-  ------------------------------------
-  ''');
+  stdout.write(
+'''
+--------------COMPLITE--------------
+it took  ${(d.inMilliseconds * 0.001).toStringAsFixed(2)} sec.
+------------------------------------
+''',
+  );
 }
 
 ///
