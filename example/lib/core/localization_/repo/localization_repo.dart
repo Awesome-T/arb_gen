@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import 'package:example/arb.langs.dart';
-import 'package:example/core/localization/repo/lds/localize_ilds.dart';
-import 'package:example/core/localization/repo/params.dart';
+import 'package:example/core/localization_/repo/lds/localize_ilds.dart';
+import 'package:example/core/localization_/repo/params.dart';
 import 'package:flutter/foundation.dart';
 
 /// The `ILocalizationRepo` interface defines methods for handling

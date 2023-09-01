@@ -1,4 +1,4 @@
-import 'package:example/core/localization/repo/lds/localize_ilds.dart';
+import 'package:example/core/localization_/repo/lds/localize_ilds.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ///

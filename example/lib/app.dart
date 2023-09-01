@@ -1,8 +1,8 @@
-import 'package:example/core/localization/presentation/pages/home_page.dart';
-import 'package:example/core/localization/presentation/notifier.dart';
+import 'package:example/core/localization_/presentation/pages/home_page.dart';
+import 'package:example/core/localization_/presentation/notifier.dart';
 import 'package:flutter/material.dart';
 
-import 'localization/localization.dart';
+import 'localization/localization.g.dart';
 
 ///
 ///

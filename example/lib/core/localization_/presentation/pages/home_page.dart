@@ -1,6 +1,6 @@
-import 'package:example/core/localization/presentation/pages/lang_select.dart';
-import 'package:example/localization/localization.dart';
-import 'package:example/core/localization/presentation/notifier.dart';
+import 'package:example/core/localization_/presentation/pages/lang_select.dart';
+import 'package:example/localization/localization.g.dart';
+import 'package:example/core/localization_/presentation/notifier.dart';
 import 'package:flutter/material.dart';
 
 ///

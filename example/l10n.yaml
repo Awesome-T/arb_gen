@@ -1,17 +1,15 @@
-  # The directory where the template and 
-  # translated arb files are located.The default is lib/l10n.
+  # The directory where the template and translated arb files are located.The default is lib/l10n.
   arb-dir: lib/l10n
   template-arb-file: localization_en.arb
   output-class: AppLocalezation
   # synthetic_package: false
   # Specifies whether the localizations class getter is nullable.
   nullable-getter: false
-  # When specified, the dart format command is run after 
-  # generating the localization files.
+  # When specified, the dart format command is run after generating the localization files.
   format: true
   # untranslated-messages-file: untranslated.json
   use-deferred-loading: false
   # output-localization-file: l10n.dart
-  output-localization-file: localization.dart
+  output-localization-file: localization.g.dart
   preferred-supported-locales:
     - en
