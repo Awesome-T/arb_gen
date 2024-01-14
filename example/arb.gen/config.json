@@ -1,16 +1,18 @@
 {
     "translateTo": [
-        "en",
-
-        "it"
+      "en",
+      "it",
+      "es",
+      "de",
+      "fr"
     ],
     "ignored": [
-        "appName"
+      "appName"
     ],
     "_pathToFile": "path to the original .arb/.json file, for example 'arb.gen/content.json' ==[_DEFAULT_PATH]",
     "pathToFile": "arb.gen/content.json",
     "_outputClass": "Name of output class localization be defaul $L",
-    "outputClass": "AppLocalezation",
+    "outputClass": "AppLocalization",
     "_lDirName": "name of directory folder `/lib/$lDirName`",
     "lDirName": "localization",
     "_arbDir": " code of the original language used in the base file",
@@ -26,4 +28,5 @@
     "apiKey": null,
     "_allAtOnce": "null",
     "allAtOnce": null
-}
+  }
+  

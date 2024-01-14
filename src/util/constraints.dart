@@ -115,49 +115,127 @@
 
 
 
+const List<String> supportedLanguagesGoogle = [
+  'af',
+  'sq',
+  'am',
+  'ar',
+  'hy',
+  'az',
+  'eu',
+  'be',
+  'bn',
+  'bs',
+  'bg',
+  'ca',
+  'ceb',
+  'ny',
+  'zh-CN',
+  'zh-TW',
+  'co',
+  'hr',
+  'cs',
+  'da',
+  'nl',
+  'en',
+  'eo',
+  'et',
+  'tl',
+  'fi',
+  'fr',
+  'fy',
+  'gl',
+  'ka',
+  'de',
+  'el',
+  'gu',
+  'ht',
+  'ha',
+  'haw',
+  'iw',
+  'he',
+  'hi',
+  'hmn',
+  'hu',
+  'is',
+  'ig',
+  'id',
+  'ga',
+  'it',
+  'ja',
+  'jw',
+  'kn',
+  'kk',
+  'km',
+  'ko',
+  'ku',
+  'ky',
+  'lo',
+  'la',
+  'lv',
+  'lt',
+  'lb',
+  'mk',
+  'mg',
+  'ms',
+  'ml',
+  'mt',
+  'mi',
+  'mr',
+  'mn',
+  'my',
+  'ne',
+  'no',
+  'ps',
+  'fa',
+  'pl',
+  'pt',
+  'pa',
+  'ro',
+  'ru',
+  'sm',
+  'gd',
+  'sr',
+  'st',
+  'sn',
+  'sd',
+  'si',
+  'sk',
+  'sl',
+  'so',
+  'es',
+  'su',
+  'sw',
+  'sv',
+  'tg',
+  'ta',
+  'tt',
+  'te',
+  'th',
+  'tr',
+  'tk',
+  'uk',
+  'ur',
+  'ug',
+  'uz',
+  'vi',
+  'cy',
+  'xh',
+  'yi',
+  'yo',
+  'zu',
+];
 
-
-
-
-
-///
-// const String KEY_PATH_TO_CONFIG = 'arb.gen/config.json';
-///
-const String ERROR_MSG = """
-\n
-    Config doesn't exist!
-    File not found at path 'arb.gen/config.json'
-    ClI arguments are not compare for Configuration
-    See details at the documentation
-    """;
-
-///
-const String greet = '''
-
-✅ Native splash complete.
-Now go finish building something awesome! 💪 You rock! 🤘🤩
-Like the package? Please give it a 👍 here: https://pub.dev/packages/flutter_native_splash
-''';
-
-const String WELCOME = '''
-╔════════════════════════════════════════════════════════════════════════════╗
-║                             Setting up flavors!                            ║
-╚════════════════════════════════════════════════════════════════════════════╝
-===> Setting up the  flavor.----
-''';
-
-const String whatsNew = '''
-╔════════════════════════════════════════════════════════════════════════════╗
-║                       NEED A GREAT FLUTTER DEVELOPER?                      ║
-╠════════════════════════════════════════════════════════════════════════════╣
-║                                                                            ║
-║   I am available!  Find me at https://www.linkedin.com/in/hansonjon/       ║
-║                                                                            ║
-╚════════════════════════════════════════════════════════════════════════════╝
-''';
-const String flavors = '''
-╔════════════════════════════════════════════════════════════════════════════╗
-║                             Setting up flavors!                            ║
-╚════════════════════════════════════════════════════════════════════════════╝
-===> Setting up the  flavor.
-''';
+const List<String> supportedFlutter = [
+  'af', 'am', 'ar', 'as', 'az', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'et',
+  'eu', 'fa', 'fi', 'fil', 'fr', 'gl', 'gsw', 'gu', 'he', 'hi', 'hr', 'hu', 'hy', 'id', 'is', 'it', 'ja', 'ka',
+  'kk', 'km', 'kn', 'ko', 'ky', 'lo', 'lt', 'lv', 'mk', 'ml', 'mn', 'mr', 'ms', 'my', 'nb', 'ne', 'nl', 'no',
+  'or', 'pa', 'pl', 'ps', 'pt', 'ro', 'ru', 'si', 'sk', 'sl', 'sq', 'sr', 'sv', 'sw', 'ta', 'te', 'th', 'tl',
+  'tr', 'uk', 'ur', 'uz', 'vi', 'zh', 'zu',
+  // 'af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'eo',
+  // 'et', 'tl', 'fi', 'fr', 'fy', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'haw', 'iw', 'he', 'hi', 'hmn', 'hu',
+  // 'is', 'ig', 'id', 'ga', 'it', 'ja', 'jw', 'kn', 'kk', 'km', 'ko', 'ku', 'ky', 'lo', 'la', 'lv', 'lt', 'lb',
+  // 'mk', 'mg', 'ms', 'ml', 'mt', 'mi', 'mr', 'mn', 'my', 'ne', 'no', 'ps', 'fa', 'pl', 'pt', 'pa', 'ro', 'ru',
+  // 'sm', 'gd', 'sr', 'st', 'sn', 'sd', 'si', 'sk', 'sl', 'so', 'es', 'su', 'sw', 'sv', 'tg', 'ta', 'tt', 'te',
+  // 'th', 'tr', 'tk', 'uk', 'ur', 'ug', 'uz', 'vi', 'cy', 'xh', 'yi', 'yo', 'zu',
+];

@@ -34,8 +34,7 @@ class PluralParser extends IParset<PuralArb> {
       final placeholders = parsedChank.placeholders ?? [];
       // *
       final translatedSublist = translatedChank.getRange(0, counVariants).toList();
-
-      /// *
+      //
       final keys = parsedChank.source.entries
           .map(
             (MapEntry<String, String> e) => e.key,
@@ -64,9 +63,6 @@ class PluralParser extends IParset<PuralArb> {
   @override
   String toSingleStr(MapEntry<String, PuralArb> entry) {
     final buff = StringBuffer();
-    //  buff.write(strWithSeparator(element));
-    //  buff.write('$str$separator');
-    // buff.writeln('$str$separator');
     entry.value.source.values.cast<String>().forEach(buff.writeln);
     final result = buff.toString();
     buff.clear();
@@ -107,10 +103,6 @@ class PluralParser extends IParset<PuralArb> {
 ///
 class PluralInnerParser implements IInnerParser {
   const PluralInnerParser();
-
-  /// * ([а-яА-ЯA-Za-z0-9_=]+) group 1 : single word
-  /// *  (\s+){0,})  group 2 : >=0 spaces
-  /// * (\{(?:[^{}]*\{[^{}]*\}[^{}]*|[^{}]+)?\})+ group 3 : some data
   ///
   /// ``
   ///     g(1) - one  g(3) - You have 1 new message
@@ -187,18 +179,18 @@ class PluralInnerParser implements IInnerParser {
       for (var y = 0; y < translatedSublist.length; y++) {
         var valueInBrackets = '';
         if (placeholders.isNotEmpty) {
-          // Счетчик для отслеживания текущей позиции в массиве placeholder
+          // Counter to track the current position in the placeholder array
           var indx = 0;
-          // Функция, которая будет вызвана для каждого совпадения в скобках {}
+          // called for each match within curly braces {}
           String replaceCallback(Match match) {
-            // Убеждаемся, что currentIndex не выходит за пределы ```replacementList```
-            // Возвращаем текущее значение из replacementList и увеличиваем indx
+            // Ensure that currentIndex does not exceed the bounds of `replacementList`
+            // Return the current value from replacementList and increment indx
             if (indx < placeholders.length) return '${{placeholders[indx++]}}';
-            // Если indx вышел за пределы _placeholders, возвращаем исходное значение
+            // If indx exceeds the bounds of _placeholders, return the original value
             return match.group(0)!;
           }
 
-          // Применяем функцию к каждому совпадению в скобках {}
+          // Apply the function to each match within curly braces {}
           final val = translatedSublist[y].replaceAllMapped(RegExp('{[^}]+}'), replaceCallback);
           //
           valueInBrackets = '${{val}}';
@@ -213,68 +205,3 @@ class PluralInnerParser implements IInnerParser {
     }
   }
 }
-
-
-
-  //
-  //
-  // Map<String, dynamic> toArb1(({String? keyWord, List<String>? placeholder, Map<dynamic, dynamic> source}) _parsedChank,
-  //     List<String> _translatedChank, Map<String, dynamic> _arbChank,
-  //     {IcuKeyWord? icuKey}) {
-  //   final _countfinaliants = _parsedChank.source.entries.length;
-  //   // выбор авриантов из массива с переводом
-  //   final _values = _translatedChank.getRange(0, _countfinaliants).toList();
-  //   // удаление выбранные элементов
-  //   _translatedChank.removeRange(0, _countfinaliants);
-  //   final _keys = _parsedChank.source.entries.map((e) => e.key).toList();
-  //   final _buff = StringBuffer();
-  //   for (var y = 0; y < _values.length; y++) {
-  //     _buff.write(' ${_keys[y]}${_values[y]}');
-  //   }
-  //   final _se = '{${_parsedChank.placeholder?.first}, ${_parsedChank.keyWord},${_buff.toString()}';
-  //   _buff.clear();
-  //   return {'${_arbChank.fKey}': '$_se}'};
-  // }
-  // Map<String, dynamic> toArb2(
-  //   ({String? keyWord, List<String>? placeholder, Map<dynamic, dynamic> source}) _parsedChank,
-  //   List<String> _translatedChank,
-  //   Map<String, dynamic> _arbChank, {
-  //   IcuKeyWord? icuKey,
-  // }) {
-  //   try {
-  //     final int _countfinaliants = _parsedChank.source.entries.length;
-  //     final List<String> _translatedSublist = _translatedChank.getRange(0, _countfinaliants).toList();
-  //     _translatedChank.removeRange(0, _countfinaliants);
-  //     final List _keys = _parsedChank.source.entries.map((e) => e.key).toList();
-  //     final StringBuffer _buff = StringBuffer();
-  //     for (var y = 0; y < _translatedSublist.length; y++) _buff.write(' ${_keys[y]}${_translatedSublist[y]}');
-  //     final String _se = '{${_parsedChank.placeholder?.first}, ${_parsedChank.keyWord},${_buff.toString()}';
-  //     _buff.clear();
-  //     return {'${_arbChank.fKey}': '$_se}'};
-  //   } catch (e) {
-  //     throw Exception(e);
-  //   }
-  // }
-  // Map<String, dynamic> toArb3(
-  //     ({
-  //       String? keyWord,
-  //       List<String>? placeholder,
-  //       Map<dynamic, dynamic> source,
-  //     }) _parsedChank,
-  //     List<String> _translatedChank,
-  //     Map<String, dynamic> _arbChank,
-  //     {IcuKeyWord? icuKey}) {
-  //   final _countfinaliants = _parsedChank.source.entries.length;
-  //   // выбор авриантов из массива с переводом
-  //   final _values = _translatedChank.getRange(0, _countfinaliants).toList();
-  //   // удаление выбранные элементов
-  //   _translatedChank.removeRange(0, _countfinaliants);
-  //   final _keys = _parsedChank.source.entries.map((e) => e.key).toList();
-  //   final _buff = StringBuffer();
-  //   for (var y = 0; y < _values.length; y++) {
-  //     _buff.write(' ${_keys[y]}${_values[y]}');
-  //   }
-  //   final _se = '{${_parsedChank.placeholder?.first}, ${_parsedChank.keyWord},${_buff.toString()}';
-  //   _buff.clear();
-  //   return {'${_arbChank.fKey}': '$_se}'};
-  // }

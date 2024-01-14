@@ -39,7 +39,7 @@ class FileReader implements IFileReader {
           .then(
             (File value) => value.writeAsString(jsonEncode(contents)).then(
               (file) {
-                print('file created ${file.path}');
+                print('ARB created ${file.path}');
                 //   stdout.write('file created ${file.path}');
                 return;
               },
@@ -47,7 +47,6 @@ class FileReader implements IFileReader {
           )
           .onError<PathExistsException>((error, stackTrace) {
         stderr.write('error $error');
-        //   stdout.ite('file created ${file.path}');
         throw error;
       });
 

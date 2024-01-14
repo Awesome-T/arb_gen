@@ -33,7 +33,7 @@ class ParserArb {
     validateMap();
   }
 
-  /// Static instances of various parser classes.
+  /// 
   final SelectPaser _select;
 
   ///

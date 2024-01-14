@@ -41,7 +41,8 @@ class MsTranslator extends ServiceTranslator {
   final String apiKey;
 
   @override
-  /// Translates a text from a specified language to another language using Microsoft Translator API.
+  /// Translates a text from a specified language to another language 
+  /// using Microsoft Translator API.
   ///
   /// Returns the translated text.
   Future<String> translate(

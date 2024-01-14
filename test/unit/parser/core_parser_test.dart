@@ -7,8 +7,6 @@ import '../../../src/parser/parser_select.dart';
 import '../../../src/parser/parser_str.dart';
 import '../../../src/util/config.dart';
 
-///
-///
 void main() {
   //
   const fakeConfigMap = <String, Object?>{
@@ -364,10 +362,7 @@ Parse the German translations from the provided string''',
         },
       );
 
-      //
-      test('description', () {
-        //
-      });
+
     },
   );
 }

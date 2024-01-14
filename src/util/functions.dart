@@ -148,7 +148,7 @@ UPDATING pubspec.yaml
   //
   else {
     stdout.write('''
-no need to UPDATING pubspec.yaml
+No need to update pubspec.yaml
 ''');
     return;
   }
@@ -172,7 +172,7 @@ Future<bool> runFlutterPubGet() async {
         result.exitCode,
       );
     }
-    stdout.write('flutter pub get was finised all files');
+    stdout.write('flutter pub get was finished, all files...');
     return true;
   });
 }
@@ -197,14 +197,15 @@ Future<void> moveFolderAndFiles(String outPutFolder) async {
       final newPath = '${targetDirectory.path}/${file.uri.pathSegments.last}';
       file.renameSync(newPath);
       stdout.write('''
-File ${file.uri.pathSegments.last} was moved 
-into $newPath
+File ${file.uri.pathSegments.last} was moved into $newPath.
+
 ''');
     }
     await sourceDirectory.delete(recursive: true);
     stdout.write('''
-Dorectory delited 
+Directory deleted
 ${sourceDirectory.path}
+
 ''');
   } on PathNotFoundException catch (e) {
     throw PathNotFoundException('$e\n$outPutFolder', const OSError());

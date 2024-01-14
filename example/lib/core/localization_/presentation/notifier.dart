@@ -2,7 +2,6 @@ import 'package:example/core/localization_/repo/localization_repo.dart';
 import 'package:example/core/localization_/repo/params.dart';
 import 'package:flutter/widgets.dart';
 
-// `notifier.dart`
 /// 
 /// The `LNotifier` class extends `ChangeNotifier` and handles localization updates.
 /// 
@@ -63,30 +62,8 @@ class InhLNotifier extends InheritedNotifier<LNotifier> {
     required super.child,
   });
 
-  /// Static method to access the `LNotifier` instance from the widget tree.
+  /// get access the `LNotifier` instance from the widget tree.
   static LNotifier of(BuildContext context) {
     return context.dependOnInheritedWidgetOfExactType<InhLNotifier>()!.notifier!;
   }
 }
-
-
-/// The `InhLNotifier` class extends `InheritedNotifier`
-/// for easy access to `LNotifier` in the widget tree.
-/// ```dart
-/// void main(List<String> args) async {
-///    WidgetsFlutterBinding.ensureInitialized();
-///    final _prefs = await SharedPreferences.getInstance();
-///    runApp(
-///      InhLNotifier(
-///        notifier: LNotifier(
-///          repoImpl: LocalizationRepoImpl(
-///          prefs: LDS(_prefs),
-///        ),
-///      ),
-///    child: App(),
-///  ),
-/// );
-/// }
-/// ```
-///
-

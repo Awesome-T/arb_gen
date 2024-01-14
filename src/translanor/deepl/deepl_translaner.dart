@@ -3,7 +3,8 @@ import 'dart:convert';
 import '../../arb_gen.dart';
 import '../i_translator.dart';
 
-/// The `DeeplTranslaner` class is a concrete implementation of the `ServiceTranslator` abstract class
+/// The `DeeplTranslaner` class is a concrete implementation of the
+///  `ServiceTranslator` abstract class
 /// specifically designed for DeepL translation service.
 class DeeplTranslaner extends ServiceTranslator {
   /// Constructor for `DeeplTranslaner`.

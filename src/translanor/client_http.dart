@@ -16,11 +16,13 @@ const IHttpClient();
 
   /// Performs a ```post``` request and returns the response as a string.
   ///
-  /// Takes a `Uri` for the URL, an object for the request body, and an optional map of headers.
+  /// Takes a `Uri` for the URL, an object for the request body, 
+  /// and an optional map of headers.
   Future<String> makePost(Uri url, Object? body, Map<String, String>? headers);
 }
 
-/// The `ClientHttp` class is an implementation of the `IHttpClient` interface for making HTTP requests.
+/// The `ClientHttp` class is an implementation of the `IHttpClient` 
+/// interface for making HTTP requests.
 class ClientHttp implements IHttpClient {
   /// Constructor for `ClientHttp`.
   const ClientHttp();
@@ -61,7 +63,8 @@ class ClientHttp implements IHttpClient {
   @override
   /// Performs a ```post``` request and returns the response as a string.
   ///
-  /// Takes a `Uri` for the URL, an object for the request body, and an optional map of headers.
+  /// Takes a `Uri` for the URL, an object for the request body, and an 
+  /// optional map of headers.
   Future<String> makePost(
     Uri url,
     Object? body,

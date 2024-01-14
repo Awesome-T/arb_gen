@@ -7,38 +7,24 @@ import 'i_parser.dart';
 import 'types_of_content.dart';
 import '../util/errors.dart';
 
-// sealed class WifiPinCodeConnectionErrors implements Enum {
-//   // static const wifiNotFound = WifiBaseErrors.wifiNotFound;
-//   // static const permisionMissing= WifiBaseErrors.permisionMissing;
-//   // static const wifiTurnedOff = WifiBaseErrors.wifiTurnedOff;
-//   // static const wrongPin = _WifiPinCodeConnectionErrors.wrongPin;
-//   // static const pinTooShort = _WifiPinCodeConnectionErrors.pinTooShort;
-//   static const List<WifiPinCodeConnectionErrors> values = [
-//  //   wifiNotFound, permisionMissing, wifiTurnedOff, wrongPin, pinTooShort,
-//   ];
-// }
-// void main(List<String> args) {
-//   WifiPinCodeConnectionErrors.values.map((e) => e.name);
-// }
-
 ///
 ///
 const String _R_SELECT = r'{\s*(\w+)\s*,\s*select\s*,((?:\s*\w+\s*{[^}]+}\s*)+)(?:\s*other\s*{([^}]+)\s*})?\s*}';
 
-/**
- * 
-    "pronoun": "{gender, select, male{he} female{she} other{they}}",
-    "@pronoun": {
-      "description": "A gendered message",
-      "placeholders": {
-        "gender": {
-          "type": "String"
-        }
-      }
-    }
- */
+
 ///
 /// Base class `StrSelectPaser` extending `CoreParser<String>`.
+/// ```json
+///     "pronoun": "{gender, select, male{he} female{she} other{they}}",
+/// "@pronoun": {
+/// "description": "A gendered message",
+/// "placeholders": {
+/// "gender": {
+/// "type": "String"
+/// }
+/// }
+/// }
+/// ```
 ///
 
 base class SelectPaser extends IParset<SelectArb> {
@@ -69,26 +55,13 @@ base class SelectPaser extends IParset<SelectArb> {
       final toVariants = _selectInnerParser.toVariants(translatedSublist, parsedChank.placeholders ?? [], keys);
       // *
       final translatedArbKey = '{${parsedChank.placeholders?.first}, ${IcuKeyWord.select.name},$toVariants}';
-      // *
-
-//       stdout.write('''
-// $runtimeType
-// $keys
-// $counVariants
-// placeholders
-// $translatedSublist
-// ''');
-//           stdout.write('''
-// $runtimeType
-// translatedChank ${translatedChank.length}
-// ''');
+    
       final result = <String, String>{key: translatedArbKey};
       translatedChank.length == (parsedChank.source.entries.length)
           ? translatedChank.clear()
           : translatedChank.removeRange(0, parsedChank.source.entries.length);
       return result;
     } on IcuParsingException catch (e) {
-      // stdout.write('Error $e');
       throw IcuParsingException('$e');
     }
   }
@@ -96,7 +69,6 @@ base class SelectPaser extends IParset<SelectArb> {
   @override
   String toSingleStr(MapEntry<String, SelectArb> entry) {
     final buff = StringBuffer();
-    // hasOtherKeyword(entry);
     // buff.write('$str$separator');
     for (final str in entry.value.source.values) {
       buff.writeln(str);
@@ -112,10 +84,7 @@ base class SelectPaser extends IParset<SelectArb> {
     try {
       final match = maatchForStr(entry);
       if (match != null) {
-        // *  final String firstPlaceholder = match.group(1)!;
-        // *   List<String> placeholders = [firstPlaceholder]
         final placeholders = <String>[match.group(1)!];
-        // * "male{he} female{she} other{they}}"
         final icuStr = match.group(2)!;
         //
         final values = RegExp('{(.*?)}').allMatches(icuStr).map((match) => match.group(1)!);
@@ -133,7 +102,6 @@ base class SelectPaser extends IParset<SelectArb> {
         return result;
       }
     } on IcuParsingException catch (e) {
-      //   stdout.write('Exception $e\n$tr');
       throw IcuParsingException('$e');
     } on FormatException catch (e) {
       throw FormatException('$e');
@@ -172,14 +140,7 @@ class SelectInnerParser implements IInnerParser {
       stdout.write(msg);
       throw FormatException('$e');
     }
-    // final List<String> values = RegExp(r'{(.*?)}')
-    //     .allMatches(keyValuePairs)
-    //     .map(
-    //       (match) => match.group(1)!,
-    //     )
-    //     .toList();
-    // final List<String> finaliables =
-    //     keyValuePairs.replaceAll(RegExp(r'{.*?}', multiLine: true), '').split(' ').where((e) => e.isNotEmpty).toList();
+ 
   }
 
   ///
@@ -201,21 +162,16 @@ class SelectInnerParser implements IInnerParser {
   /// `toArb()`
   ///
   String toVariants(List<String> translatedSublist, List<String> placeholders, List<String> keys) {
-    //assert(keys.length == translatedSublist.length, 'keys.length != translatedSublist.length');
     try {
       final buff = StringBuffer();
-      // create Strings wich look like this patern : `variant{Value }`
       for (var y = 0; y < translatedSublist.length; y++) {
         buff.write(' ${keys[y]}{${translatedSublist[y]}}');
       }
-      // *  `{placehoilder, select, variant{Value} other{Other}}`
       final y = buff.toString();
       buff.clear();
       return y;
     } on Exception catch (e) {
       throw Exception('$e');
-    } on AssertionError catch (e) {
-      throw AssertionError(e);
     }
   }
 

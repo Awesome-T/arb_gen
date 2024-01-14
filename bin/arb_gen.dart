@@ -3,11 +3,11 @@ import 'dart:io';
 import '../src/arb_gen.dart';
 import '../src/parser/parser_arb.dart';
 
-///
+
 Future<void> main(List<String> arguments) async {
   final sWatch = Stopwatch()..start();
-  // * Translator - это класс, используемый для реализации API-вызовов,
-  // *  чтобы осуществить процедуру перевода.
+  // * Translator is a class used for implementing API calls
+  // * to perform the translation procedure.
   late final ServiceTranslator translator;
 
   // Check if the configuration is ready to be loaded
@@ -20,39 +20,32 @@ Future<void> main(List<String> arguments) async {
   // [1] Configuration Loading:    _configInit(arguments);
   late final cotnig = Config.load(reader.loadMapFromFile('arb.gen/config.json'));
   // [2] Loading ARB/JSON Data:
-  // * Load the ARB/JSON content from the specified path (_cotnig.pathToOriginSource).
-  // * IFileReader использует метод loadMapFromFile для загрузки Map из файла.
-  // Этот метод читает файл, содержащий JSON-данные, и возвращает Map,
-  // соответствующую JSON-данным.
-  // final filrereader= IFileReader();
+  // * Load the ARB/JSON content from the specified path (config.pathToOriginSource).
+  // * IFileReader uses the loadMapFromFile method to load a Map from a file.
+  // This method reads a file containing JSON data and returns a Map
+  // corresponding to the JSON data.
+  // final fileReader = IFileReader();
   final arbContent = reader.loadMapFromFile(cotnig.pathToFile);
-  // * ParserArb - это класс, используемый для преобразования
-  // * ARB/JSON-контента в формат Dart. DTArb - это класс,
-  // * используемый для хранения ARB/JSON-контента.
+  // * ParserArb is a class used to transform
+  // * ARB/JSON content into Dart format. DTArb is a class
+  // * used to store ARB/JSON content.
   final parseing = ParserArb(cotnig, arbContent);
-  //     Pprocessing(
-  //   cotnig,
-  //   arbContent,
-  //   SelectPaser(const SelectInnerParser()),
-  //   PluralParser(const PluralInnerParser()),
-  //   SimpleStrParser(),
-  // );
   //
   final parsedData = parseing.fromArb;
   // Преобразует строку в карту, используя метод strToMap.
   final str = parseing.toSingleStr(parsedData);
-  // * cotnig.apiKey и cotnig.translater - это параметры конфигурации,
-  // * которые могут быть использованы для создания экземпляра Translator,
-  // * чтобы выполнить перевод. cotnig.apiKey - это API-ключ,
-  // * а cotnig.translater - сервис, с которым API-ключ связан
+ // * config.apiKey and config.translator are configuration parameters
+  // * that can be used to create an instance of Translator
+  // * to perform the translation. config.apiKey is an API key,
+  // * and config.translator is the service associated with the API key
   // * (Google Translate, Yandex Translate).
   translator = ServiceTranslator.select(cotnig.translater, cotnig.apiKey);
-  //  [3] Translation Process:
-  //  * Create an instance of AbsClass to perform the translation.
-  //  * Call translatedMaps on AbsClass to get a stream of translated maps.
+    // [3] Translation Process:
+  // * Create an instance of AbsClass to perform the translation.
+  // * Call translatedMaps on AbsClass to get a stream of translated maps.
   final transladedStream = translator.translations(str, cotnig.translateTo);
-  //  * [4] Creating Translated .ARB Files:
-  //  * Iterate over the stream of translated maps.
+  // * [4] Creating Translated .ARB Files:
+  // * Iterate over the stream of translated maps.
   await for (final ({String data, String lang}) item in transladedStream) {
     //
     final updatedMap = parseing.strToMap(parsedData, item.data);
@@ -73,7 +66,7 @@ Future<void> main(List<String> arguments) async {
   final d = sWatch.elapsed;
   sWatch.stop();
   stdout.write(
-'''
+    '''
 --------------COMPLITE--------------
 it took  ${(d.inMilliseconds * 0.001).toStringAsFixed(2)} sec.
 ------------------------------------

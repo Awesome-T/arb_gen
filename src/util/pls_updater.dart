@@ -27,7 +27,8 @@ abstract final class IosUpdater {
     }
     final str = buff.toString();
     buff.clear();
-    return '''<key>CFBundleLocalizations</key>
+    return '''
+<key>CFBundleLocalizations</key>
 <array>
 $str
 </array>''';

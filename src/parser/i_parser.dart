@@ -1,12 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'types_of_content.dart';
 
-// r'\🌟';
-//r'\$SEPARATOR';
-//r'¶';
-// r'¶';
-// r'\|\|\|';
-
 // Represents a base class for ICU (International
 // Components for Unicode) keywords.
 // - [SelectArb] for ICU select keyword
@@ -20,28 +14,13 @@ abstract class _IParset<T extends DTArb<dynamic>> {
   ///
   final RegExp mainRegexp;
 
-  ///
-  /// ICU ``select`` or ``plural`` must contain `other`  word
-  ///
-  // void hasOtherKeyword(MapEntry<String, T> entry) {
-  //   const String otherKyeWord = 'other';
-  //   if (entry.value.source is Map) {
-  //     final Iterable keys = (entry.value.source as Map).keys;
-  //     //
-  //     final bool hasOtherKeyword = keys.contains(otherKyeWord) ||
-  //         keys.contains(otherKyeWord.toLowerCase()) ||
-  //         keys.contains(otherKyeWord.toUpperCase());
-  //     if (!hasOtherKeyword) {
-  //       throw IcuParsingException(
-  //           '''Exception: key ${entry.key} - argument option must have `${otherKyeWord.toLowerCase()}` keyword clause ''',);
-  //     }
-  //   }
-  // }
 
   ///
   /// Checks if the type of value to be processed by the parser is valid.
   ///
-  bool confirmVal(MapEntry<String, T> entry) => (entry.value is String) || (entry.value is List);
+  bool confirmVal(MapEntry<String, T> entry) {
+    return (entry.value is String) || (entry.value is List);
+  }
 
   /// Regular expression to be used by subclasses.
   /// Matches the first occurrence of the regular
