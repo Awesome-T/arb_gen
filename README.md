@@ -22,7 +22,7 @@ Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dev_dependencies:
-  arb_gen: ^1.0.0
+  arb_gen: ^0.0.3
 ```
 
 Then, run:
