@@ -13,10 +13,12 @@ class DeeplTranslaner extends ServiceTranslator {
   DeeplTranslaner(this.apiKey);
 
   @override
+
   /// The API key required for DeepL API.
   final String apiKey;
 
   @override
+
   /// Translates a text from a specified language to another language using DeepL API.
   ///
   /// Returns the translated text.

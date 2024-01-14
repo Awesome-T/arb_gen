@@ -2,6 +2,7 @@
 ///
 /// More dartdocs go here.
 library arb_gen;
+
 export 'parser/core_parser.dart';
 export 'parser/parser_plural.dart';
 export 'parser/parser_select.dart';

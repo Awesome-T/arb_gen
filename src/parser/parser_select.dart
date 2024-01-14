@@ -9,8 +9,8 @@ import '../util/errors.dart';
 
 ///
 ///
-const String _R_SELECT = r'{\s*(\w+)\s*,\s*select\s*,((?:\s*\w+\s*{[^}]+}\s*)+)(?:\s*other\s*{([^}]+)\s*})?\s*}';
-
+const String _R_SELECT =
+    r'{\s*(\w+)\s*,\s*select\s*,((?:\s*\w+\s*{[^}]+}\s*)+)(?:\s*other\s*{([^}]+)\s*})?\s*}';
 
 ///
 /// Base class `StrSelectPaser` extending `CoreParser<String>`.
@@ -48,14 +48,18 @@ base class SelectPaser extends IParset<SelectArb> {
       // *
       final counVariants = parsedChank.source.entries.length;
       // *
-      final translatedSublist = translatedChank.getRange(0, counVariants).toList();
+      final translatedSublist =
+          translatedChank.getRange(0, counVariants).toList();
       // *
-      final keys = parsedChank.source.entries.map((e) => e.key).toList().cast<String>();
+      final keys =
+          parsedChank.source.entries.map((e) => e.key).toList().cast<String>();
       // *
-      final toVariants = _selectInnerParser.toVariants(translatedSublist, parsedChank.placeholders ?? [], keys);
+      final toVariants = _selectInnerParser.toVariants(
+          translatedSublist, parsedChank.placeholders ?? [], keys);
       // *
-      final translatedArbKey = '{${parsedChank.placeholders?.first}, ${IcuKeyWord.select.name},$toVariants}';
-    
+      final translatedArbKey =
+          '{${parsedChank.placeholders?.first}, ${IcuKeyWord.select.name},$toVariants}';
+
       final result = <String, String>{key: translatedArbKey};
       translatedChank.length == (parsedChank.source.entries.length)
           ? translatedChank.clear()
@@ -87,10 +91,14 @@ base class SelectPaser extends IParset<SelectArb> {
         final placeholders = <String>[match.group(1)!];
         final icuStr = match.group(2)!;
         //
-        final values = RegExp('{(.*?)}').allMatches(icuStr).map((match) => match.group(1)!);
+        final values = RegExp('{(.*?)}')
+            .allMatches(icuStr)
+            .map((match) => match.group(1)!);
         //
-        final finaliables =
-            icuStr.replaceAll(RegExp('{.*?}', multiLine: true), '').split(' ').where((e) => e.isNotEmpty);
+        final finaliables = icuStr
+            .replaceAll(RegExp('{.*?}', multiLine: true), '')
+            .split(' ')
+            .where((e) => e.isNotEmpty);
         //
         final data = Map<String, String>.fromIterables(finaliables, values);
         //
@@ -118,7 +126,8 @@ class SelectInnerParser implements IInnerParser {
 
   ///
   @override
-  ({List<String> placeholders, Map<String, String> source}) parceInnerData(String data) {
+  ({List<String> placeholders, Map<String, String> source}) parceInnerData(
+      String data) {
     try {
       final match = RegExp(patern).firstMatch(data);
       // final String firstPlaceholder = match!.group(1)!;
@@ -127,20 +136,24 @@ class SelectInnerParser implements IInnerParser {
       //
       final keyValuePairs = match.group(2)!;
       //
-      final values = RegExp('{(.*?)}').allMatches(keyValuePairs).map((match) => match.group(1)!);
+      final values = RegExp('{(.*?)}')
+          .allMatches(keyValuePairs)
+          .map((match) => match.group(1)!);
       //
-      final finaliables =
-          keyValuePairs.replaceAll(RegExp('{.*?}', multiLine: true), '').split(' ').where((e) => e.isNotEmpty);
+      final finaliables = keyValuePairs
+          .replaceAll(RegExp('{.*?}', multiLine: true), '')
+          .split(' ')
+          .where((e) => e.isNotEmpty);
       //
       final source = Map<String, String>.fromIterables(finaliables, values);
       final result = (placeholders: placeholders, source: source);
       return result;
     } on FormatException catch (e) {
-      const msg = '''FormatException: does not follow valid regular expression syntax.''';
+      const msg =
+          '''FormatException: does not follow valid regular expression syntax.''';
       stdout.write(msg);
       throw FormatException('$e');
     }
- 
   }
 
   ///
@@ -161,7 +174,8 @@ class SelectInnerParser implements IInnerParser {
   ///
   /// `toArb()`
   ///
-  String toVariants(List<String> translatedSublist, List<String> placeholders, List<String> keys) {
+  String toVariants(List<String> translatedSublist, List<String> placeholders,
+      List<String> keys) {
     try {
       final buff = StringBuffer();
       for (var y = 0; y < translatedSublist.length; y++) {

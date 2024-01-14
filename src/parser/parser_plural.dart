@@ -8,7 +8,8 @@ import 'types_of_content.dart';
 ///
 ///``{count, plural, zero{You have no new messages} one{You have 1 new message} other{You have {count} new messages}}``
 /// * group(1) - count
-const String _R_PLURAL = r'{\s*(\w+)\s*,\s*plural,\s*((?:[^{}]+|\{(?:[^{}]+|\{[^{}]*\})*\})*)}';
+const String _R_PLURAL =
+    r'{\s*(\w+)\s*,\s*plural,\s*((?:[^{}]+|\{(?:[^{}]+|\{[^{}]*\})*\})*)}';
 
 ///
 ///
@@ -33,7 +34,8 @@ class PluralParser extends IParset<PuralArb> {
       // *
       final placeholders = parsedChank.placeholders ?? [];
       // *
-      final translatedSublist = translatedChank.getRange(0, counVariants).toList();
+      final translatedSublist =
+          translatedChank.getRange(0, counVariants).toList();
       //
       final keys = parsedChank.source.entries
           .map(
@@ -46,7 +48,8 @@ class PluralParser extends IParset<PuralArb> {
         keys,
       );
       //
-      final translatedIcuStr = '{${parsedChank.placeholders?.first},${IcuKeyWord.plural.name},$variants}';
+      final translatedIcuStr =
+          '{${parsedChank.placeholders?.first},${IcuKeyWord.plural.name},$variants}';
       //
       final arbTranslated = <String, dynamic>{key: translatedIcuStr};
       translatedChank.length == (parsedChank.source.entries.length)
@@ -103,6 +106,7 @@ class PluralParser extends IParset<PuralArb> {
 ///
 class PluralInnerParser implements IInnerParser {
   const PluralInnerParser();
+
   ///
   /// ``
   ///     g(1) - one  g(3) - You have 1 new message
@@ -111,7 +115,8 @@ class PluralInnerParser implements IInnerParser {
   ///     other{You have {count} new messages}
   /// ``
   @override
-  String get patern => r'([а-яА-ЯA-Za-z0-9_=]+)(\s+){0,}(\{(?:[^{}]*\{[^{}]*\}[^{}]*|[^{}]+)?\})+';
+  String get patern =>
+      r'([а-яА-ЯA-Za-z0-9_=]+)(\s+){0,}(\{(?:[^{}]*\{[^{}]*\}[^{}]*|[^{}]+)?\})+';
 
   // * r'([а-яА-ЯA-Za-z0-9_=]+)(\s+){0,}(\{(?:[^{}]*\{[^{}]*\}[^{}]*|[^{}]+)?\})+',
 
@@ -139,7 +144,8 @@ class PluralInnerParser implements IInnerParser {
       // `{Some data are placed here}`
       final wittBrackets = m.group(3)!;
       // variant wo curly brackets.
-      final woBrackets = wittBrackets.substring(1, wittBrackets.length - 1).trim();
+      final woBrackets =
+          wittBrackets.substring(1, wittBrackets.length - 1).trim();
       //
       source['${m.group(1)}'] = woBrackets;
     }
@@ -191,7 +197,8 @@ class PluralInnerParser implements IInnerParser {
           }
 
           // Apply the function to each match within curly braces {}
-          final val = translatedSublist[y].replaceAllMapped(RegExp('{[^}]+}'), replaceCallback);
+          final val = translatedSublist[y]
+              .replaceAllMapped(RegExp('{[^}]+}'), replaceCallback);
           //
           valueInBrackets = '${{val}}';
         }

@@ -1,12 +1,12 @@
 import 'dart:io';
 
-/// Typically, iOS applications define key application metadata, 
-/// including supported locales, in an Info.plist file that is built 
+/// Typically, iOS applications define key application metadata,
+/// including supported locales, in an Info.plist file that is built
 /// into the application bundle. To configure the locales supported by
 ///  your app, use the following instructions:
 /// Open your project’s ios/Runner.xcworkspace Xcode file.
 /// In the Project Navigator, open the Info.plist file under the Runner
-/// project’s Runner folder. Select the Information Property List item. 
+/// project’s Runner folder. Select the Information Property List item.
 /// Then select Add Item from the Editor menu, and select Localizations
 /// from the pop-up menu.
 /// Select and expand the newly-created Localizations item. For each
@@ -56,7 +56,7 @@ $str
       hasIos: iosDir.existsSync(),
       hasMacos: macosDir.existsSync(),
     );
-    
+
     if (isExist.hasIos) _updPls(iosDir, plsFilePath, languages);
     if (isExist.hasMacos) _updPls(macosDir, plsFilePath, languages);
     return;
@@ -76,12 +76,16 @@ $str
     final buff = StringBuffer();
 
     // Find the index of 'CFBundleLocalizations' in Info.plist
-    final localizationsIndx = lines.indexWhere((String i) => i.contains(RegExp('<key>CFBundleLocalizations</key>')));
+    final localizationsIndx = lines.indexWhere(
+        (String i) => i.contains(RegExp('<key>CFBundleLocalizations</key>')));
     final hasLocalizations = localizationsIndx != -1;
 
     if (hasLocalizations) {
       // If 'CFBundleLocalizations' exists, update the existing section
-      final endIndx = localizationsIndx + lines.sublist(localizationsIndx).indexWhere((i) => i.trim() == '</array>');
+      final endIndx = localizationsIndx +
+          lines
+              .sublist(localizationsIndx)
+              .indexWhere((i) => i.trim() == '</array>');
       for (var i = 0; i < languages.length; i++) {
         if (i == 0) buff.writeln('''    <array>''');
         buff.writeln('''        <string>${languages[i]}</string>''');

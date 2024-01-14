@@ -1,12 +1,11 @@
-
 ///
 /// languageMap
 /// Impressive! This language map is thorough and covers a diverse
 /// range of languages. It's great for handling localization in your
-/// application. If you have any questions or need assistance with 
+/// application. If you have any questions or need assistance with
 /// anything related to this code or beyond, feel free to ask!
- const Map<String, Map<String, String>> LANGS = {
- // 'af': {'Afrikaans': 'Afrikaans'},
+const Map<String, Map<String, String>> LANGS = {
+  // 'af': {'Afrikaans': 'Afrikaans'},
   'sq': {'Albanian': 'Shqiptar'},
   // 'am': {'Amharic': 'አማርኛ'},
   'ar': {'Arabic': 'العربية'},
@@ -110,10 +109,7 @@
   'he': {'עברית': 'Hebrew'},
   'tt': {'Татар': 'Tatar'},
   'tk': {'Türkmen': 'Turkmen'},
-  
 };
-
-
 
 const List<String> supportedLanguagesGoogle = [
   'af',
@@ -227,10 +223,14 @@ const List<String> supportedLanguagesGoogle = [
 ];
 
 const List<String> supportedFlutter = [
-  'af', 'am', 'ar', 'as', 'az', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'es', 'et',
-  'eu', 'fa', 'fi', 'fil', 'fr', 'gl', 'gsw', 'gu', 'he', 'hi', 'hr', 'hu', 'hy', 'id', 'is', 'it', 'ja', 'ka',
-  'kk', 'km', 'kn', 'ko', 'ky', 'lo', 'lt', 'lv', 'mk', 'ml', 'mn', 'mr', 'ms', 'my', 'nb', 'ne', 'nl', 'no',
-  'or', 'pa', 'pl', 'ps', 'pt', 'ro', 'ru', 'si', 'sk', 'sl', 'sq', 'sr', 'sv', 'sw', 'ta', 'te', 'th', 'tl',
+  'af', 'am', 'ar', 'as', 'az', 'be', 'bg', 'bn', 'bs', 'ca', 'cs', 'cy', 'da',
+  'de', 'el', 'en', 'es', 'et',
+  'eu', 'fa', 'fi', 'fil', 'fr', 'gl', 'gsw', 'gu', 'he', 'hi', 'hr', 'hu',
+  'hy', 'id', 'is', 'it', 'ja', 'ka',
+  'kk', 'km', 'kn', 'ko', 'ky', 'lo', 'lt', 'lv', 'mk', 'ml', 'mn', 'mr', 'ms',
+  'my', 'nb', 'ne', 'nl', 'no',
+  'or', 'pa', 'pl', 'ps', 'pt', 'ro', 'ru', 'si', 'sk', 'sl', 'sq', 'sr', 'sv',
+  'sw', 'ta', 'te', 'th', 'tl',
   'tr', 'uk', 'ur', 'uz', 'vi', 'zh', 'zu',
   // 'af', 'sq', 'am', 'ar', 'hy', 'az', 'eu', 'be', 'bn', 'bs', 'ca', 'cs', 'cy', 'da', 'de', 'el', 'en', 'eo',
   // 'et', 'tl', 'fi', 'fr', 'fy', 'gl', 'ka', 'de', 'el', 'gu', 'ht', 'ha', 'haw', 'iw', 'he', 'hi', 'hmn', 'hu',

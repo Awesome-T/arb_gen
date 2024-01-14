@@ -2,10 +2,9 @@ import 'dart:convert';
 
 import '../../arb_gen.dart';
 
-
 /// The `YandexTranslator` class is a concrete implementation of the `ServiceTranslator` abstract class
 /// specifically designed for Yandex Translate service.
-/// 
+///
 ///
 ///  url https://yandex.ru/dev/translate/doc/en/
 ///
@@ -46,13 +45,15 @@ class YandexTranslator extends ServiceTranslator {
   /// Constructor for `YandexTranslator`.
   ///
   /// [apiKey] is the API key required for accessing the Yandex Translate API.
-  YandexTranslator(this.apiKey);// : super(_languageList);
+  YandexTranslator(this.apiKey); // : super(_languageList);
 
   @override
+
   /// The API key required for Yandex Translate API.
   final String apiKey;
 
   @override
+
   /// Translates a text from a specified language to another language using Yandex Translate API.
   ///
   /// Returns the translated text.
@@ -69,7 +70,8 @@ class YandexTranslator extends ServiceTranslator {
       // }
       //  headers["Content-Type"] = "application/json"
       // * https://translate.yandex.net/api/v1.5/tr.json/translate
-      final uri = Uri.parse('https://translate.yandex.net/api/v1.5/tr.json/translate?key=$apiKey&text=$source&lang=$to');
+      final uri = Uri.parse(
+          'https://translate.yandex.net/api/v1.5/tr.json/translate?key=$apiKey&text=$source&lang=$to');
       final makeGetResponse = await httpClient.makeGet(uri, null);
       final result = jsonDecode(makeGetResponse) as Map<String, dynamic>;
       return (result['text'] as List).first as String;

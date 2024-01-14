@@ -13,7 +13,7 @@ Future<void> main() async => runZonedGuarded(
         runApp(
           InhLNotifier(
             notifier: LNotifier(
-              repoImpl:  ILocalizationRepo.impl(
+              repoImpl: ILocalizationRepo.impl(
                 prefs: LDS(_prefs),
               ),
             ),

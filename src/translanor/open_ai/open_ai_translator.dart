@@ -12,10 +12,12 @@ class OpenAiTranslator extends ServiceTranslator {
   OpenAiTranslator(this.apiKey);
 
   @override
+
   /// The API key required for OpenAI API.
   final String apiKey;
 
   @override
+
   /// Translates a text from a specified language to another language using OpenAI API.
   ///
   /// Returns the translated text.
@@ -40,7 +42,8 @@ class OpenAiTranslator extends ServiceTranslator {
           <String, String>{
             'role': 'user',
             // ignore: lines_longer_than_80_chars
-            'content': 'Translate each sentence separated by SEPARATOR for app localization into $to:$source',
+            'content':
+                'Translate each sentence separated by SEPARATOR for app localization into $to:$source',
           }
         ],
       };

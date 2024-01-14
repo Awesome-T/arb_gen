@@ -14,7 +14,6 @@ abstract class _IParset<T extends DTArb<dynamic>> {
   ///
   final RegExp mainRegexp;
 
-
   ///
   /// Checks if the type of value to be processed by the parser is valid.
   ///

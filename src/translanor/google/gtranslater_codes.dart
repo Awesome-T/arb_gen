@@ -4,7 +4,7 @@ import 'dart:io';
 
 import '../i_translator.dart';
 
-/// The `GoogleTS` class is a concrete implementation of the 
+/// The `GoogleTS` class is a concrete implementation of the
 /// `ServiceTranslator` abstract class
 /// specifically designed for Google Translate service.
 class GoogleTS extends ServiceTranslator {
@@ -12,7 +12,8 @@ class GoogleTS extends ServiceTranslator {
   const GoogleTS();
 
   @override
-  /// Translates a text from a specified language to another 
+
+  /// Translates a text from a specified language to another
   /// language using Google Translate API.
   ///
   /// Returns the translated text.
@@ -79,12 +80,13 @@ class GoogleTS extends ServiceTranslator {
   }
 
   @override
-  /// Returns `null` for the API key since Google Translate API doesn't 
+
+  /// Returns `null` for the API key since Google Translate API doesn't
   /// require an API key for basic usage.
   String? get apiKey => null;
 }
 
-/// The `_TGen` class is responsible for generating a token used in Google 
+/// The `_TGen` class is responsible for generating a token used in Google
 /// Translate API URLs.
 class _TGen {
   /// Generate and return a token.
@@ -109,7 +111,9 @@ class _TGen {
           if (55296 == (g & 64512) &&
               f + 1 < a.toString().length &&
               56320 == (a.toString().codeUnitAt(f + 1) & 64512)) {
-            g = 65536 + ((g & 1023) << 10) + (a.toString().codeUnitAt(++f) & 1023);
+            g = 65536 +
+                ((g & 1023) << 10) +
+                (a.toString().codeUnitAt(++f) & 1023);
             d
               ..add(g >> 18 | 240)
               ..add(g >> 12 & 63 | 128);

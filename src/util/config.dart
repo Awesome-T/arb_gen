@@ -86,7 +86,6 @@ class Config {
   /// This method is doing a good job of validating the configuration,
   /// ensuring that essential parameters are correctly set.
   void _chekSettingsAndContent() {
-
     //  Если массив `_langCodes` длиннее, и тебе необходимо проверить,
     // * что все элементы массива `translateTo` содержатся в массиве `_langCodes`
     checkTargetLangs(langs());
@@ -101,7 +100,9 @@ class Config {
   ///   * ``^[a-zA-Z\D]{1}[_AZaz\S\d+]{0,}$``
   ///   * `outputClass != null`
   void chechNameOfOutClass() {
-    if (outputClass != null && !RegExp(r'^[a-zA-Z\D]{1}[_AZaz\S\d+]{0,}$', unicode: true).hasMatch(outputClass!)) {
+    if (outputClass != null &&
+        !RegExp(r'^[a-zA-Z\D]{1}[_AZaz\S\d+]{0,}$', unicode: true)
+            .hasMatch(outputClass!)) {
       final msg = '`outputClass` name $outputClass is incorrect';
       stdout.write(msg);
       throw ConfigArgException(msg);
@@ -112,7 +113,8 @@ class Config {
   /// * extension must be .json or .arb
   /// * "pathToFile": "arb.gen/content.json",
   void checkPathToFile() {
-    if (!RegExp(r'.*\.(JSON|json|arb|ARB)$', unicode: true).hasMatch(pathToFile)) {
+    if (!RegExp(r'.*\.(JSON|json|arb|ARB)$', unicode: true)
+        .hasMatch(pathToFile)) {
       final msg = 'extesion must be .json or .arb $pathToFile';
       stdout.write(msg);
       throw FileSystemException(msg);
@@ -134,7 +136,8 @@ class Config {
   void checkApiKeyOfService() {
     final notEqual = apiKey.runtimeType != translater.runtimeType;
     if (notEqual) {
-      const msg = 'Both properties (apiKey and translater) must be specified or be null.';
+      const msg =
+          'Both properties (apiKey and translater) must be specified or be null.';
       stdout.write(msg);
       throw const ConfigArgException(msg);
     }
@@ -143,10 +146,13 @@ class Config {
   ///  Если массив `_langCodes` длиннее, и тебе необходимо проверить,
   /// * что все элементы массива `translateTo` содержатся в массиве `_langCodes`
   void checkTargetLangs(List<String> suppurtedLangCodes) {
-    final isNotConfirmCodes = !translateTo.toSet().every(suppurtedLangCodes.contains);
+    final isNotConfirmCodes =
+        !translateTo.toSet().every(suppurtedLangCodes.contains);
     if (isNotConfirmCodes) {
-      final notSypportedCodes = translateTo.whereNot(suppurtedLangCodes.contains).toList();
-      final msg = 'Exeprion: some language codes are wrong : $notSypportedCodes';
+      final notSypportedCodes =
+          translateTo.whereNot(suppurtedLangCodes.contains).toList();
+      final msg =
+          'Exeprion: some language codes are wrong : $notSypportedCodes';
       stdout.write(msg);
       throw ConfigArgException(msg);
     }
@@ -162,7 +168,8 @@ class Config {
       !suppurtedLangCodes.contains(preferredLanguage)
           ? msg =
               'Error preferredLanguage: $preferredLanguage  is not valid and this code must be in `translateTo` array'
-          : msg = 'Error preferredLanguage: $preferredLanguage must be in `translateTo` array';
+          : msg =
+              'Error preferredLanguage: $preferredLanguage must be in `translateTo` array';
       stdout.write(msg);
       throw ConfigArgException(msg);
     }
@@ -175,21 +182,26 @@ class Config {
   }
 
   /// directory for settings ```arb.gen```
-  static final Directory _inDint = Directory('${Directory.current.path}/arb.gen');
+  static final Directory _inDint =
+      Directory('${Directory.current.path}/arb.gen');
 
   ///
   static final File _confog = File('${_inDint.path}/config.json');
 
   /// folder and config are exists
-  static bool get isFileCofigExist => _inDint.existsSync() && _confog.existsSync();
+  static bool get isFileCofigExist =>
+      _inDint.existsSync() && _confog.existsSync();
 
   ///
   factory Config.load(Map<String, dynamic> data) {
     try {
       return Config._(
         preferredLanguage: data['preferredLanguage'] as String?,
-        translateTo: List<String>.from(data['translateTo'] as List)..map((e) => e.toLowerCase()).toSet().toList(),
-        ignored: data['ignored'] == null ? <String>[] : List<String>.from(data['ignored'] as List),
+        translateTo: List<String>.from(data['translateTo'] as List)
+          ..map((e) => e.toLowerCase()).toSet().toList(),
+        ignored: data['ignored'] == null
+            ? <String>[]
+            : List<String>.from(data['ignored'] as List),
         lDirName: (data['localization'] as String?) ?? 'localization',
         baseLanguage: data['baseLanguage'] as String?,
         translater: data['translater'] as String?,

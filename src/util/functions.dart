@@ -81,14 +81,24 @@ Future<void> upgradePubspec() async {
   // *
   final origennArray = List<String>.unmodifiable(lines);
   // *
-  final hasLocalization =
-      lines.indexWhere((i) => i.contains(RegExp('(flutter_localizations:){1}'))) != -1 ? true : false;
+  final hasLocalization = lines.indexWhere(
+              (i) => i.contains(RegExp('(flutter_localizations:){1}'))) !=
+          -1
+      ? true
+      : false;
   // *
-  final hasIntl = lines.indexWhere((i) => i.contains(RegExp('(intl:){1}'))) != -1 ? true : false;
+  final hasIntl =
+      lines.indexWhere((i) => i.contains(RegExp('(intl:){1}'))) != -1
+          ? true
+          : false;
   // *
-  final hasGenerate = lines.indexWhere((i) => i.contains(RegExp('(generate: true){1}'))) != -1 ? true : false;
+  final hasGenerate =
+      lines.indexWhere((i) => i.contains(RegExp('(generate: true){1}'))) != -1
+          ? true
+          : false;
 // *
-  if (!lines.contains('    sdk: flutter')) throw Exception('ERROR: pubspec.yaml has no Flutter SDK dependency');
+  if (!lines.contains('    sdk: flutter'))
+    throw Exception('ERROR: pubspec.yaml has no Flutter SDK dependency');
 
   for (var i = 0; i < lines.length; i++) {
     if (lines[i] == '' || lines[i].startsWith('#')) continue;
@@ -182,13 +192,17 @@ Future<bool> runFlutterPubGet() async {
 /// directory to `lib/$outPutFolder` directory.
 Future<void> moveFolderAndFiles(String outPutFolder) async {
   try {
-    final targetDirectory = Directory('${Directory.current.path}/lib/$outPutFolder');
-    targetDirectory.existsSync() == true ? targetDirectory.deleteSync(recursive: true) : null;
+    final targetDirectory =
+        Directory('${Directory.current.path}/lib/$outPutFolder');
+    targetDirectory.existsSync() == true
+        ? targetDirectory.deleteSync(recursive: true)
+        : null;
 
     final dartToolGen = '${Directory.current.path}/.dart_tool/flutter_gen';
     final sourceDirectory = Directory(dartToolGen);
 
-    if (!targetDirectory.existsSync()) targetDirectory.createSync(recursive: true);
+    if (!targetDirectory.existsSync())
+      targetDirectory.createSync(recursive: true);
 
     final files = sourceDirectory.listSync();
 

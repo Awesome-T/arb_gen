@@ -41,7 +41,8 @@ void main() {
       'description': 'New messages count on the Home screen',
       'placeholders': {'count': {}},
     },
-    'pageHomeBirthday': '{sex, select, male{His birthday} female{Her birthday} other{Their birthday}}',
+    'pageHomeBirthday':
+        '{sex, select, male{His birthday} female{Her birthday} other{Their birthday}}',
     '@pageHomeBirthday': {
       'description': 'Birthday message on the Home screen',
       'placeholders': {'sex': {}},
@@ -55,7 +56,11 @@ void main() {
     'commonCustomDateFormat': 'Custom date format: {date}',
     '@commonCustomDateFormat': {
       'placeholders': {
-        'date': {'type': 'DateTime', 'format': 'EEE, M/d/y', 'isCustomDateFormat': 'true'},
+        'date': {
+          'type': 'DateTime',
+          'format': 'EEE, M/d/y',
+          'isCustomDateFormat': 'true'
+        },
       },
     },
     'productCostInfo': 'Cost: {cost}',
@@ -75,12 +80,16 @@ void main() {
       },
     },
 
-    'roomUnavailableContactOrganiserDialogCount': '{count,plural, =1{an organiser} other{organisers}}',
+    'roomUnavailableContactOrganiserDialogCount':
+        '{count,plural, =1{an organiser} other{organisers}}',
     '@roomUnavailableContactOrganiserDialogCount': {
       'placeholders': {'count': {}},
     },
     'singleString': 'This is just a normal string.',
-    '@singleString': {'context': 'views:Home page', 'description': 'Comment for the single string.'},
+    '@singleString': {
+      'context': 'views:Home page',
+      'description': 'Comment for the single string.'
+    },
     'datePickerMinuteOne': '1 minute',
     'datePickerMinuteOther': r'$minute minutes',
     '@datePickerMinute': {
@@ -93,13 +102,17 @@ void main() {
     },
     'contactDetailsPopupEmailCopiedMessage': 'Copied {email} to clipboard',
     '@contactDetailsPopupEmailCopiedMessage': {
-      'description': 'Message being displayed in a snackbar upon long-clicking email in contact details popup',
+      'description':
+          'Message being displayed in a snackbar upon long-clicking email in contact details popup',
       'placeholders': {
         'email': {'type': 'String', 'example': 'example@gmail.com'},
       },
     },
     'formLabelDone': 'Done',
-    '@formLabelDone': {'description': 'Label being displayed below every form field that is filled and valid'},
+    '@formLabelDone': {
+      'description':
+          'Label being displayed below every form field that is filled and valid'
+    },
 
     'remove_all_done_dialog_body':
         '{count, plural, =1 {Are you sure you want to remove 1 item? This operation cannot be undone.} other {Are you sure you want to remove all {count} items? This operation cannot be undone.}}',
@@ -116,9 +129,19 @@ void main() {
           'format': 'currency',
           'example': r'$1000.00',
           'description': 'Account balance',
-          'optionalParameters': {'decimalDigits': 2, 'name': 'USD', 'symbol': r'$', 'customPattern': '¤#0.00'},
+          'optionalParameters': {
+            'decimalDigits': 2,
+            'name': 'USD',
+            'symbol': r'$',
+            'customPattern': '¤#0.00'
+          },
         },
-        'date': {'type': 'DateTime', 'format': 'yMd', 'example': '11/10/2021', 'description': 'Balance date'},
+        'date': {
+          'type': 'DateTime',
+          'format': 'yMd',
+          'example': '11/10/2021',
+          'description': 'Balance date'
+        },
       },
     },
 
@@ -174,7 +197,9 @@ void main() {
     '@appName': {'description': 'The name of the application'},
 
     'commonLoading': 'Loading...',
-    '@commonLoading': {'description': 'Loading message displayed during data retrieval'},
+    '@commonLoading': {
+      'description': 'Loading message displayed during data retrieval'
+    },
 
     'pageLoginButton': 'Login',
     '@pageLoginButton': {'description': 'Login button label'},
@@ -223,7 +248,8 @@ void main() {
     // Forms
     'formSubmitButton': 'Submit',
     '@formSubmitButton': {'description': 'Submit button label'},
-    'confirmationDialogRemoveItem': '{count, plural, =1{Remove this item?} other{Remove {count} items?}}',
+    'confirmationDialogRemoveItem':
+        '{count, plural, =1{Remove this item?} other{Remove {count} items?}}',
     '@confirmationDialogRemoveItem': {
       'description': 'Confirmation dialog for removing items',
       'placeholders': {
@@ -356,13 +382,12 @@ Parse the German translations from the provided string''',
             isTrue,
           );
           expect(
-            const DeepCollectionEquality().equals(newArbMap.values, ardData.values),
+            const DeepCollectionEquality()
+                .equals(newArbMap.values, ardData.values),
             isFalse,
           );
         },
       );
-
-
     },
   );
 }

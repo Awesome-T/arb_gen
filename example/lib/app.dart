@@ -17,7 +17,8 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) => MaterialApp(
         supportedLocales: AppLocalezation.supportedLocales,
         localizationsDelegates: AppLocalezation.localizationsDelegates,
-        localeListResolutionCallback: (_, __) => InhLNotifier.of(context).locate,
+        localeListResolutionCallback: (_, __) =>
+            InhLNotifier.of(context).locate,
         localeResolutionCallback: (_, __) => InhLNotifier.of(context).locate,
         locale: InhLNotifier.of(context).locate,
         home: HomePage(),

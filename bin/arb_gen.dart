@@ -3,7 +3,6 @@ import 'dart:io';
 import '../src/arb_gen.dart';
 import '../src/parser/parser_arb.dart';
 
-
 Future<void> main(List<String> arguments) async {
   final sWatch = Stopwatch()..start();
   // * Translator is a class used for implementing API calls
@@ -18,7 +17,8 @@ Future<void> main(List<String> arguments) async {
   //
   const reader = FileReader();
   // [1] Configuration Loading:    _configInit(arguments);
-  late final cotnig = Config.load(reader.loadMapFromFile('arb.gen/config.json'));
+  late final cotnig =
+      Config.load(reader.loadMapFromFile('arb.gen/config.json'));
   // [2] Loading ARB/JSON Data:
   // * Load the ARB/JSON content from the specified path (config.pathToOriginSource).
   // * IFileReader uses the loadMapFromFile method to load a Map from a file.
@@ -34,13 +34,13 @@ Future<void> main(List<String> arguments) async {
   final parsedData = parseing.fromArb;
   // Преобразует строку в карту, используя метод strToMap.
   final str = parseing.toSingleStr(parsedData);
- // * config.apiKey and config.translator are configuration parameters
+  // * config.apiKey and config.translator are configuration parameters
   // * that can be used to create an instance of Translator
   // * to perform the translation. config.apiKey is an API key,
   // * and config.translator is the service associated with the API key
   // * (Google Translate, Yandex Translate).
   translator = ServiceTranslator.select(cotnig.translater, cotnig.apiKey);
-    // [3] Translation Process:
+  // [3] Translation Process:
   // * Create an instance of AbsClass to perform the translation.
   // * Call translatedMaps on AbsClass to get a stream of translated maps.
   final transladedStream = translator.translations(str, cotnig.translateTo);

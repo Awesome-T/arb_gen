@@ -2,14 +2,14 @@ import 'package:example/core/localization_/repo/lds/localize_ilds.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 ///
-/// The `LDS` class implements the `ILDS` interface using SharedPreferences 
+/// The `LDS` class implements the `ILDS` interface using SharedPreferences
 /// for local data storage.
-/// 
+///
 class LDS implements ILDS {
-  /// 
+  ///
   /// Constructor for `LDS` that takes a `SharedPreferences` instance as a p
   /// arameter.
-  /// 
+  ///
   const LDS(SharedPreferences preferences) : _prefs = preferences;
 
   final SharedPreferences _prefs;
@@ -18,7 +18,8 @@ class LDS implements ILDS {
   ///
   /// Returns `true` if the operation is successful, otherwise `false`.
   @override
-  Future<bool?> createOrUpdate(String data, String id) async => await _prefs.setString(id, data);
+  Future<bool?> createOrUpdate(String data, String id) async =>
+      await _prefs.setString(id, data);
 
   /// Reads data from SharedPreferences based on the specified ID.
   ///

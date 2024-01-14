@@ -2,7 +2,8 @@ import '../util/errors.dart';
 import 'i_parser.dart';
 import 'types_of_content.dart';
 
-const String _R_STRING = r'{\s*(\w+)\s*((?:[^{}]+|\{(?:[^{}]+|\{[^{}]*\})*\})*)}';
+const String _R_STRING =
+    r'{\s*(\w+)\s*((?:[^{}]+|\{(?:[^{}]+|\{[^{}]*\})*\})*)}';
 
 /// Base class `SimpleStrParser`
 ///
@@ -14,9 +15,10 @@ base class SimpleStrParser extends IParset<StringArb> {
   Map<String, StringArb>? fromArb(MapEntry<String, dynamic> map) {
     try {
       // Extract placeholders using regex
-      final regxPlaceholders = RegExp(r'\{([^{}]+)\}').allMatches(map.value as String);
+      final regxPlaceholders =
+          RegExp(r'\{([^{}]+)\}').allMatches(map.value as String);
       final placeholders = <String>[];
-      for (final  str in regxPlaceholders) {
+      for (final str in regxPlaceholders) {
         str.group(1) != null ? placeholders.add(str.group(1)!) : null;
       }
 
@@ -46,7 +48,9 @@ base class SimpleStrParser extends IParset<StringArb> {
       final placeholders = parsedChunk.placeholders ?? <String>[];
 
       // Remove the translated string from the list
-      translatedChunk.length == 1 ? translatedChunk.removeLast() : translatedChunk.removeRange(0, 1);
+      translatedChunk.length == 1
+          ? translatedChunk.removeLast()
+          : translatedChunk.removeRange(0, 1);
 
       // Handle placeholders
       if (placeholders.isNotEmpty) {

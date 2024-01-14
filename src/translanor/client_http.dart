@@ -7,7 +7,7 @@ import 'dart:io';
 ///
 /// The `IHttpClient` interface defines methods for making HTTP requests.
 abstract interface class IHttpClient {
-const IHttpClient();
+  const IHttpClient();
 
   /// Performs a ```get``` request and returns the response as a string.
   ///
@@ -16,18 +16,19 @@ const IHttpClient();
 
   /// Performs a ```post``` request and returns the response as a string.
   ///
-  /// Takes a `Uri` for the URL, an object for the request body, 
+  /// Takes a `Uri` for the URL, an object for the request body,
   /// and an optional map of headers.
   Future<String> makePost(Uri url, Object? body, Map<String, String>? headers);
 }
 
-/// The `ClientHttp` class is an implementation of the `IHttpClient` 
+/// The `ClientHttp` class is an implementation of the `IHttpClient`
 /// interface for making HTTP requests.
 class ClientHttp implements IHttpClient {
   /// Constructor for `ClientHttp`.
   const ClientHttp();
 
   @override
+
   /// Performs a ```get``` request and returns the response as a string.
   ///
   /// Takes a `Uri` for the URL and an optional map of headers.
@@ -61,9 +62,10 @@ class ClientHttp implements IHttpClient {
   }
 
   @override
+
   /// Performs a ```post``` request and returns the response as a string.
   ///
-  /// Takes a `Uri` for the URL, an object for the request body, and an 
+  /// Takes a `Uri` for the URL, an object for the request body, and an
   /// optional map of headers.
   Future<String> makePost(
     Uri url,

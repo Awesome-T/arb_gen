@@ -65,7 +65,8 @@ class _HomePageState extends State<HomePage> {
                     color: Color.fromARGB(239, 244, 213, 240),
                     child: Column(
                       children: [
-                        Text('Lang', style: Theme.of(context).textTheme.headlineSmall),
+                        Text('Lang',
+                            style: Theme.of(context).textTheme.headlineSmall),
                         Text('code: ${AppLocalezation.of(context).localeName}'),
                         Text(
                             'language ${InhLNotifier.of(context).langs[AppLocalezation.of(context).localeName]!.keys.first}'),
@@ -79,7 +80,8 @@ class _HomePageState extends State<HomePage> {
                     width: double.infinity,
                     child: Column(
                       children: [
-                        Text('Not translated', style: Theme.of(context).textTheme.headlineSmall),
+                        Text('Not translated',
+                            style: Theme.of(context).textTheme.headlineSmall),
                         Txt(AppLocalezation.of(context).appName),
                       ],
                     ),
@@ -90,7 +92,8 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         Divider(),
-                        Text('Translated', style: Theme.of(context).textTheme.headlineSmall),
+                        Text('Translated',
+                            style: Theme.of(context).textTheme.headlineSmall),
                         Txt(AppLocalezation.of(context).pageLoginPassword),
                         Txt(AppLocalezation.of(context).pageLoginUsername),
                       ],
@@ -102,8 +105,10 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         Divider(),
-                        Text('DT Format', style: Theme.of(context).textTheme.headlineSmall),
-                        Txt(AppLocalezation.of(context).postCreatedInfo(DateTime.now())),
+                        Text('DT Format',
+                            style: Theme.of(context).textTheme.headlineSmall),
+                        Txt(AppLocalezation.of(context)
+                            .postCreatedInfo(DateTime.now())),
                       ],
                     ),
                   ),
@@ -113,8 +118,10 @@ class _HomePageState extends State<HomePage> {
                     child: Column(
                       children: [
                         Divider(),
-                        Text('KEYWORD: select', style: Theme.of(context).textTheme.headlineMedium),
-                        Text('sedan, cabriolet, truck or other', style: Theme.of(context).textTheme.bodyMedium),
+                        Text('KEYWORD: select',
+                            style: Theme.of(context).textTheme.headlineMedium),
+                        Text('sedan, cabriolet, truck or other',
+                            style: Theme.of(context).textTheme.bodyMedium),
                         Row(children: [
                           Expanded(
                             flex: 1,
@@ -128,14 +135,16 @@ class _HomePageState extends State<HomePage> {
                             child: Center(
                               child: ValueListenableBuilder(
                                 valueListenable: _controllerSelect1,
-                                builder: (_, value, __) =>
-                                    Txt(AppLocalezation.of(context).commonVehicleType('${value.text}')),
+                                builder: (_, value, __) => Txt(
+                                    AppLocalezation.of(context)
+                                        .commonVehicleType('${value.text}')),
                               ),
                             ),
                           ),
                         ]),
                         Padding(padding: EdgeInsets.only(top: 8)),
-                        Text('admin, manager or other', style: Theme.of(context).textTheme.bodyMedium),
+                        Text('admin, manager or other',
+                            style: Theme.of(context).textTheme.bodyMedium),
                         Row(children: [
                           Expanded(
                             flex: 1,
@@ -148,8 +157,9 @@ class _HomePageState extends State<HomePage> {
                             child: Center(
                               child: ValueListenableBuilder(
                                 valueListenable: _controllerSelect2,
-                                builder: (_, value, __) =>
-                                    Txt(AppLocalezation.of(context).pageHomeWelcomeRole('${value.text}')),
+                                builder: (_, value, __) => Txt(
+                                    AppLocalezation.of(context)
+                                        .pageHomeWelcomeRole('${value.text}')),
                               ),
                             ),
                           )
@@ -163,8 +173,10 @@ class _HomePageState extends State<HomePage> {
                     color: Color.fromARGB(66, 164, 157, 221),
                     child: Column(
                       children: [
-                        Text('KEYWORD: plural', style: Theme.of(context).textTheme.headlineMedium),
-                        Text('=1, other', style: Theme.of(context).textTheme.bodyMedium),
+                        Text('KEYWORD: plural',
+                            style: Theme.of(context).textTheme.headlineMedium),
+                        Text('=1, other',
+                            style: Theme.of(context).textTheme.bodyMedium),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -182,14 +194,16 @@ class _HomePageState extends State<HomePage> {
                                 valueListenable: _controllerSelect3,
                                 builder: (_, value, __) {
                                   return Txt(AppLocalezation.of(context)
-                                      .remove_all_done_dialog_body(int.tryParse(value.text) ?? 0));
+                                      .remove_all_done_dialog_body(
+                                          int.tryParse(value.text) ?? 0));
                                 },
                               ),
                             ),
                           ],
                         ),
                         Padding(padding: EdgeInsets.only(top: 8)),
-                        Text('1, other', style: Theme.of(context).textTheme.bodyMedium),
+                        Text('1, other',
+                            style: Theme.of(context).textTheme.bodyMedium),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -205,8 +219,10 @@ class _HomePageState extends State<HomePage> {
                               flex: 6,
                               child: ValueListenableBuilder(
                                 valueListenable: _controllerSelect4,
-                                builder: (___, value, __) => Txt(AppLocalezation.of(context)
-                                    .roomUnavailableContactOrganiserDialogCount(int.tryParse(value.text) ?? 0)),
+                                builder: (___, value, __) => Txt(AppLocalezation
+                                        .of(context)
+                                    .roomUnavailableContactOrganiserDialogCount(
+                                        int.tryParse(value.text) ?? 0)),
                               ),
                             )
                           ],

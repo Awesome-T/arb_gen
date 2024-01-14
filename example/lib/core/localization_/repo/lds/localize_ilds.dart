@@ -1,6 +1,6 @@
-/// 
+///
 /// The `ILDS` interface defines methods for Local Data Storage operations.
-/// 
+///
 abstract interface class ILDS {
   /// Creates or updates data with the specified ID in the local storage.
   ///

@@ -7,10 +7,10 @@ import 'ms/ms_translator.dart';
 import 'open_ai/open_ai_translator.dart';
 import 'yandex/yandex_translator.dart';
 
-/// The `ServiceTranslator` abstract class provides a common 
+/// The `ServiceTranslator` abstract class provides a common
 /// interface for various translation services.
 abstract class ServiceTranslator {
-  /// Constructor for `ServiceTranslator` that takes an optional 
+  /// Constructor for `ServiceTranslator` that takes an optional
   /// `httpClient` parameter.
   const ServiceTranslator([
     this.httpClient = const ClientHttp(),
@@ -47,7 +47,7 @@ abstract class ServiceTranslator {
     String to = 'en',
   });
 
-  /// Selects and returns an instance of `ServiceTranslator` based on 
+  /// Selects and returns an instance of `ServiceTranslator` based on
   /// the provided type and API key.
   ///
   /// Supported types include 'deepl', 'yandex', 'azure' or 'microsoft', 'openAI'.

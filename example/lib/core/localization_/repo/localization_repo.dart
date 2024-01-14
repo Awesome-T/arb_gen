@@ -13,7 +13,8 @@ abstract class ILocalizationRepo {
   ///
   /// [LocalizationRepoImpl]
   ///
-  factory ILocalizationRepo.impl({required ILDS prefs, Map<String, Map<String, String>>? langs}) =>
+  factory ILocalizationRepo.impl(
+          {required ILDS prefs, Map<String, Map<String, String>>? langs}) =>
       LocalizationRepoImpl(prefs: prefs);
 
   ///

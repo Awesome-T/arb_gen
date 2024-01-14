@@ -1,4 +1,3 @@
-
 import 'package:example/core/localization_/presentation/notifier.dart';
 import 'package:example/localization/localization.g.dart';
 import 'package:flutter/material.dart';
@@ -28,7 +27,8 @@ class _LangSelectState extends State<LangSelect> {
     _textEditingController.addListener(
       () {
         if (_textEditingController.text != '') {
-          final _entries = _notifier.value.entries.where((entry) => entry.key.contains(_textEditingController.text));
+          final _entries = _notifier.value.entries.where(
+              (entry) => entry.key.contains(_textEditingController.text));
           var _feached = Map.fromEntries(_entries);
           _notifier.value = _feached;
         } else {
@@ -96,7 +96,8 @@ class _LangSelectState extends State<LangSelect> {
                       final e = value.entries.toList()[i];
                       return RadioListTile<Locale>(
                         value: Locale(e.key),
-                        groupValue: Locale(AppLocalezation.of(context).localeName),
+                        groupValue:
+                            Locale(AppLocalezation.of(context).localeName),
                         onChanged: (_) async {
                           InhLNotifier.of(context).updateLocalization(e.key);
                           Navigator.of(context).pop();
