@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
+  <meta name="generator" content="made with love by dartdoc 8.0.3">
+  <meta name="description" content="arb_gen API docs, for the Dart programming language.">
+  <title>arb_gen - Dart API docs</title>
+
+
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  
+  <link rel="stylesheet" href="static-assets/github.css?v1">
+  <link rel="stylesheet" href="static-assets/styles.css?v1">
+  <link rel="icon" href="static-assets/favicon.png?v1">
+
+  
+</head>
+
+
+<body data-base-href="" data-using-base-href="false" class="light-theme">
+
+<div id="overlay-under-drawer"></div>
+
+<header id="title">
+  <span id="sidenav-left-toggle" class="material-symbols-outlined" role="button" tabindex="0">menu</span>
+  <ol class="breadcrumbs gt-separated dark hidden-xs">
+    <li><a href="https://github.com/Awesome-T/arb_gen">arb_gen package</a></li>
+  </ol>
+  <div class="self-name">arb_gen</div>
+  <form class="search navbar-right" role="search">
+    <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+  <div class="toggle" id="theme-button">
+    <label for="theme">
+      <input type="checkbox" id="theme" value="light-theme">
+      <span id="dark-theme-button" class="material-symbols-outlined">
+        brightness_4
+      </span>
+      <span id="light-theme-button" class="material-symbols-outlined">
+        brightness_5
+      </span>
+    </label>
+  </div>
+</header>
+<main>
+
+  <div id="dartdoc-main-content" class="main-content">
+      
+<section class="desc markdown">
+  <p><a href="https://pub.dev/packages/arb_gen"><img src="https://img.shields.io/pub/v/arb_gen.svg" alt="Pub package"></a>
+<a href="https://pub.dev/packages/arb_gen"><img src="https://badgen.net/pub/likes/arb_gen" alt="Pub likes"></a>
+<a href="https://github.com/Awesome-T/arb_gen/actions/workflows/dart.yml"><img src="https://github.com/Awesome-T/arb_gen/actions/workflows/dart.yml/badge.svg" alt="Dart Test"></a>
+<a href="https://github.com/Awesome-T/arb_gen/actions"><img src="https://github.com/Baseflow/flutter-geocoding/workflows/Geocoding/badge.svg" alt="Buid status"></a>
+<a href="https://github.com/Awesome-T/arb_gen/blob/dev/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
+<a href="https://pub.dev/packages/lint"><img src="https://img.shields.io/badge/style-lint-4BC0F5.svg" alt="style: lint"></a></p>
+<h1 id="arb-gen">ARB Gen</h1>
+<!-- ARB Gen is a Dart package designed to simplify the translation and localization process in Flutter projects using ARB (Application Resource Bundle) files. It automates the generation of translated ARB files, allowing you to focus on the translation itself. -->
+<p>ARB Gen is a powerful Dart package tailored for Flutter projects, streamlining the translation and localization processes through ARB (Application Resource Bundle) files. This package automates the generation of translated ARB files, providing a seamless experience for developers and allowing them to concentrate on the translation aspect. Key features include automatic translation from a base language to multiple target languages, effortless integration with Flutter projects, and a flexible configuration setup that accommodates customization through a configuration file or command line arguments. ARB Gen also supports dynamic updates, allowing Flutter apps to receive new translations without requiring manual intervention. Developers can easily install the package by adding a dependency to their pubspec.yaml file and running flutter pub get. With straightforward usage steps and clear integration instructions, ARB Gen enhances the localization workflow, making it efficient and developer-friendly.</p>
+<h2 id="features">Features</h2>
+<ul>
+<li><strong>Automatic Translation:</strong> Translate your content from a base language to multiple target languages with ease.</li>
+<li><strong>Integration with Flutter:</strong> Easily integrate the generated translations into your Flutter project.</li>
+<li><strong>Flexible Configuration:</strong> Customize the translation process with a configuration file or command line arguments.</li>
+<li><strong>Dynamic Updates:</strong> Dynamically update your Flutter app with new translations without manual intervention.</li>
+</ul>
+<h2 id="installation">Installation</h2>
+<p>Add the following dependency to your <code>pubspec.yaml</code> file:</p>
+<pre class="language-yaml"><code class="language-yaml">dev_dependencies:
+  arb_gen: ^0.0.3
+</code></pre>
+<p>Then, run:</p>
+<pre class="language-bash"><code class="language-bash">flutter pub get
+</code></pre>
+<h2 id="usage">Usage</h2>
+<h4 id="1-configuration">1. Configuration</h4>
+<p>Create a configuration file arb.gen/config.json or use command line arguments to specify translation settings. Here's an example configuration file:</p>
+<pre class="language-json"><code class="language-json">{
+  "translateTo": ["fr", "es"],
+  "ignored": ["keyToIgnore"],
+  "pathToFile": "arb.gen/content.json",
+  "outputFolder": "lib/l10n/",
+  "arbName": "localization",
+  "baseLanguage": "en",
+  "translater": "google",
+  "apiKey": "YOUR_TRANSLATION_API_KEY",
+  "allAtOnce": true
+}
+</code></pre>
+<h3 id="2-run-arb-gen">2. Run ARB Gen</h3>
+<p>Run the following command to execute the translation process:</p>
+<pre class="language-bash"><code class="language-bash">dart run arb.gen.dart
+</code></pre>
+<h3 id="3-integration-with-flutter">3. Integration with Flutter</h3>
+<p>If allAtOnce is set to false in your configuration, follow these steps to integrate the generated translations into your Flutter project:</p>
+<h4 id="31-update-pubspecyaml">3.1 Update pubspec.yaml</h4>
+<pre class="language-yaml"><code class="language-yaml">flutter:
+  generate: true
+
+dependencies:
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.17.0
+</code></pre>
+<h4 id="32-create-l10nyaml">3.2 Create l10n.yaml</h4>
+<pre class="language-yaml"><code class="language-yaml">arb-dir: lib/l10n
+template-arb-file: localization_en.arb
+output-localization-file: app_localizations.dart
+</code></pre>
+<h4 id="33-run-flutter-pub-get">3.3 Run Flutter Pub Get</h4>
+<p>Run the following command to fetch the dependencies and generate the localized files:</p>
+<pre class="language-bash"><code class="language-bash">flutter pub get
+</code></pre>
+<h4 id="34-move-generated-files-manually">3.4 Move Generated Files Manually</h4>
+<p>Manually move the generated ARB files from the specified output folder (lib/l10n/ by default) to your project's localization folder.</p>
+<pre class="language-bash"><code class="language-bash">mv generated_arb_files/* lib/l10n/
+</code></pre>
+<h4 id="35-updating-the-ios-app-bundle">3.5 Updating the iOS app bundle</h4>
+<p><a href="https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#localizing-for-ios-updating-the-ios-app-bundle">See the documentation on the website.</a></p>
+</section>
+
+
+      <section class="summary">
+          <h2>Libraries</h2>
+        <dl>
+        </dl>
+      </section>
+
+  </div> <!-- /.main-content -->
+
+  <div id="dartdoc-sidebar-left" class="sidebar sidebar-offcanvas-left">
+    <!-- The search input and breadcrumbs below are only responsively visible at low resolutions. -->
+<header id="header-search-sidebar" class="hidden-l">
+  <form class="search-sidebar" role="search">
+    <input type="text" id="search-sidebar" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
+  </form>
+</header>
+
+<ol class="breadcrumbs gt-separated dark hidden-l" id="sidebar-nav">
+    <li><a href="https://github.com/Awesome-T/arb_gen">arb_gen package</a></li>
+</ol>
+
+
+    <h5 class="hidden-xs"><span class="package-name">arb_gen</span> <span class="package-kind">package</span></h5>
+    <ol>
+      <li class="section-title">Libraries</li>
+</ol>
+
+  </div>
+
+  <div id="dartdoc-sidebar-right" class="sidebar sidebar-offcanvas-right">
+  </div>
+
+</main>
+
+<footer>
+  <span class="no-break">
+    arb_gen
+      0.0.3
+  </span>
+
+  
+</footer>
+
+
+
+<script src="static-assets/highlight.pack.js?v1"></script>
+<script src="static-assets/docs.dart.js"></script>
+
+
+
+</body>
+
+</html>
+

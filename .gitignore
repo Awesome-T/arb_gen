@@ -39,7 +39,7 @@ migrate_working_dir/
 
 # Flutter/Dart/Pub related
 # Файлы связанные с Flutter, Dart и Pub
-**/doc/api/
+# **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
 .flutter-plugins
