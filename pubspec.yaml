@@ -5,7 +5,6 @@ homepage: https://github.com/Awesome-T/arb_gen
 repository: https://github.com/Awesome-T/arb_gen
 issue_tracker: https://github.com/Awesome-T/arb_gen/issues
 documentation: https://github.com/Awesome-T/arb_gen
-author: "@Awesome-T"
 
 environment:
   sdk : '>=3.2.4 <4.0.0'
