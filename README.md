@@ -56,7 +56,7 @@ Create a configuration file arb.gen/config.json or use command line arguments to
 Run the following command to execute the translation process:
 
 ```bash
-dart arb.gen.dart
+dart run arb.gen.dart
 ```
 
 ### 3. Integration with Flutter
