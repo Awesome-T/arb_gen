@@ -1,14 +1,14 @@
 [![Pub package](https://img.shields.io/pub/v/arb_gen.svg)](https://pub.dev/packages/arb_gen)
+[![CI](https://github.com/Awesome-T/arb_gen/actions/workflows/ci.yaml/badge.svg)](https://github.com/Awesome-T/arb_gen/actions)
 [![Pub likes](https://badgen.net/pub/likes/arb_gen)](https://pub.dev/packages/arb_gen)
-![issues](https://img.shields.io/github/issues/Awesome-T/arb_gen)
-![PRs](https://img.shields.io/github/issues-pr/Awesome-T/arb_gen)
+![GH: issues](https://img.shields.io/github/issues/Awesome-T/arb_gen)
+![GH: PRs](https://img.shields.io/github/issues-pr/Awesome-T/arb_gen)
+![GH: last commit](https://img.shields.io/github/last-commit/Awesome-T/arb_gen?color=blue&logo=GitHub&style=flat)
 [![style: lint](https://img.shields.io/badge/style-lint-4BC0F5.svg)](https://pub.dev/packages/lint)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Awesome-T/arb_gen/blob/dev/LICENSE)
 
-<!-- ![GitHub contributors](https://img.shields.io/github/contributors/Awesome-T/arb_gen) -->
-
 # ARB Gen
-<!-- ARB Gen is a Dart package designed to simplify the translation and localization process in Flutter projects using ARB (Application Resource Bundle) files. It automates the generation of translated ARB files, allowing you to focus on the translation itself. -->
+
 ARB Gen is a powerful Dart package tailored for Flutter projects, streamlining the translation and localization processes through ARB (Application Resource Bundle) files. This package automates the generation of translated ARB files, providing a seamless experience for developers and allowing them to concentrate on the translation aspect. Key features include automatic translation from a base language to multiple target languages, effortless integration with Flutter projects, and a flexible configuration setup that accommodates customization through a configuration file or command line arguments. ARB Gen also supports dynamic updates, allowing Flutter apps to receive new translations without requiring manual intervention. Developers can easily install the package by adding a dependency to their pubspec.yaml file and running flutter pub get. With straightforward usage steps and clear integration instructions, ARB Gen enhances the localization workflow, making it efficient and developer-friendly.
 
 ## Features
@@ -24,7 +24,7 @@ Add the following dependency to your `pubspec.yaml` file:
 
 ```yaml
 dev_dependencies:
-  arb_gen: ^0.0.3
+  arb_gen:
 ```
 
 Then, run:
@@ -35,9 +35,9 @@ flutter pub get
 
 ## Usage
 
-#### 1. Configuration
+### 1. Configuration
 
-Create a configuration file arb.gen/config.json or use command line arguments to specify translation settings. Here's an example configuration file:
+Create a configuration file arb.gen/config.json. Here's an example configuration file:
 
 ```json
 {
@@ -95,7 +95,7 @@ flutter:
 dependencies:
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
+  intl:
 ```
 
 #### 3.2 Create l10n.yaml
@@ -126,35 +126,45 @@ mv generated_arb_files/* lib/l10n/
 
 [See the documentation on the website.](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#localizing-for-ios-updating-the-ios-app-bundle)
 
-#### translated example
+#### Translated example
 
-![Alt text](assets\de.png)
-![Alt text](assets\fr.png)
-
-
-
-<!-- 
 <table>
     <tbody>
         <tr>
-            <td align="center" style="background-color: white">
-                <a href="https://verygood.ventures"><img src="https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_black.png" width="225"/></a>
+            <td align="center">
+                <b> DE </>
             </td>
-            <td align="center" style="background-color: white">
-                <a href="https://getstream.io/chat/flutter/tutorial/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_FlutterChat&utm_term=bloc" target="_blank"><img width="250px" src="https://stream-blog.s3.amazonaws.com/blog/wp-content/uploads/fc148f0fc75d02841d017bb36e14e388/Stream-logo-with-background-.png"/></a><br/><span><a href="https://getstream.io/chat/flutter/tutorial/?utm_source=Github&utm_medium=Github_Repo_Content_Ad&utm_content=Developer&utm_campaign=Github_Jan2022_FlutterChat&utm_term=bloc" target="_blank">Try the Flutter Chat Tutorial &nbsp💬</a></span>
+            <td align="center">
+                <b> FR </>
             </td>
-            <td align="center" style="background-color: white">
-                <a href="https://www.miquido.com/flutter-development-company/?utm_source=github&utm_medium=sponsorship&utm_campaign=bloc-silver-tier&utm_term=flutter-development-company&utm_content=miquido-logo">
-                <img src="https://raw.githubusercontent.com/felangel/bloc/master/docs/assets/miquido_logo.png" width="225"/></a>
+            <td align="center">
+                <b> EN </>
+            </td>
+            <td align="center">
+                <b> ES </>
             </td>
         </tr>
         <tr>
-            <td align="center" style="background-color: white">
-                <a href="https://bit.ly/parabeac_flutterbloc"><img src="https://raw.githubusercontent.com/felangel/bloc/master/docs/assets/parabeac_logo.png" width="225"/></a>
+            <td align="center">
+                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/de.png">
+                    <img src="assets\de.png" width="225" height=255 />
+                </a>
             </td>
-            <td align="center" style="background-color: white">
-                <a href="https://www.netguru.com/services/flutter-app-development?utm_campaign=%5BS%5D%5BMob%5D%20Flutter&utm_source=github&utm_medium=sponsorship&utm_term=bloclibrary"><img src="https://raw.githubusercontent.com/felangel/bloc/master/docs/assets/netguru_logo.png" width="225"/></a>
+            <td align="center">
+                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/fr.png">
+                    <img src="assets\fr.png" width="225" height=255 />
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/fr.png">
+                    <img src="assets\en.png" width="225" height=255 />
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/fr.png">
+                    <img src="assets\es.png" width="200" height=255 />
+                </a>
             </td>
         </tr>
     </tbody>
-</table> -->
+</table>
