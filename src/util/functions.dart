@@ -50,7 +50,7 @@ Future<void> createL10nyaml(
             }),
           )
           .onError((error, stackTrace) {
-        stdout.write('''
+        stderr.write('''
 File l10n.yaml ERROR $error
 ''');
         return;
@@ -182,14 +182,19 @@ Future<bool> runFlutterPubGet() async {
         result.exitCode,
       );
     }
-    stdout.write('flutter pub get was finished, all files...');
+    //TODO:
+    stdout.write('''
+flutter pub get was finished, all files.
+''');
     return true;
   });
 }
 
 ///
 /// Moves files from the `.dart_tool/flutter_gen`
+///
 /// directory to `lib/$outPutFolder` directory.
+///
 Future<void> moveFolderAndFiles(String outPutFolder) async {
   try {
     final targetDirectory =
@@ -210,16 +215,9 @@ Future<void> moveFolderAndFiles(String outPutFolder) async {
       if (file.path.endsWith('.yaml')) continue;
       final newPath = '${targetDirectory.path}/${file.uri.pathSegments.last}';
       file.renameSync(newPath);
-      stdout.write('''
-File ${file.uri.pathSegments.last} was moved into $newPath.
-
-''');
     }
     await sourceDirectory.delete(recursive: true);
-    stdout.write('''
-Directory deleted
-${sourceDirectory.path}
-
+    stdout.write('''Generated files was moved into 'lib' directory 
 ''');
   } on PathNotFoundException catch (e) {
     throw PathNotFoundException('$e\n$outPutFolder', const OSError());
@@ -228,19 +226,22 @@ ${sourceDirectory.path}
 
 ///
 ///
-///
-String createMapWithLangs(List<String> langs) {
-//
+void createMapWithLangs(
+  List<String> langs,
+  String arbName,
+) {
+  //
   final tr = Map<String, Map<String, String>>.fromEntries(
     LANGS.entries.where((e) => langs.contains(e.key)),
   );
 
   final jsonString = jsonEncode(tr);
-  final file = File('${Directory.current.path}/lib/arb.langs.dart')
+  final file = File('${Directory.current.path}/lib/$arbName/langs.g.dart')
     ..createSync()
-    ..writeAsStringSync('const LANGS = $jsonString;');
-  stdout.write(file.path);
-  return file.path;
+    ..writeAsStringSync('''
+///
+const LANGS = $jsonString;''');
+  return;
 }
 
 ///
@@ -293,5 +294,51 @@ class _StringsSo {
       return s + b;
     }
     return s;
+  }
+}
+
+///
+/// `.gitignore`
+Future<void> unpateGitIgnore(String arbDir, String arbName) async {
+  final dir = '${Directory.current.path}/.gitignore';
+  final gitignoreFile = File(dir);
+  final isExists = gitignoreFile.existsSync();
+  if (isExists) {
+    //
+    final lines = gitignoreFile.readAsLinesSync();
+// "arbDir": "lib/l10n",
+// "arbName": "localization",
+    final ignored = '''
+$arbDir/
+lib/$arbName/''';
+
+    final bool d = lines.indexWhere(
+              (i) => i.contains(
+                RegExp(
+                  r'$ignored',
+                  // '($ignored){1}',
+                  multiLine: true,
+                ),
+              ),
+            ) !=
+            -1
+        ? true
+        : false;
+
+    if (!d) {
+      lines.insert(lines.length, ignored);
+      final buf = StringBuffer();
+      for (final element in lines) {
+        buf.writeln(element);
+      }
+      final data = buf.toString();
+      buf.clear();
+      File(dir)
+        ..createSync()
+        ..writeAsStringSync(data);
+      stdout.writeln('''
+.gitignore  updated
+''');
+    }
   }
 }

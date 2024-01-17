@@ -1,5 +1,4 @@
 # Miscellaneous
-# Исключить все файлы с расширениями
 *.class
 *.log
 *.pyc
@@ -12,14 +11,12 @@
 migrate_working_dir/
 
 # IntelliJ related
-# Файлы проекта IntelliJ IDEA
 *.iml
 *.ipr
 *.iws
 .idea/
 
 # IntelliJ/Android Studio specific
-# Папка .idea содержит конфигурацию проекта IntelliJ IDEA
 **/*.iml
 **/.idea/
 **/.idea/workspace.xml
@@ -38,7 +35,6 @@ migrate_working_dir/
 **/.idea/libraries
 
 # Flutter/Dart/Pub related
-# Файлы связанные с Flutter, Dart и Pub
 **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
@@ -50,54 +46,37 @@ migrate_working_dir/
 
 
 # Freezed code generation
-# Файлы, создаваемые при генерации кода с использованием Freezed
 .freezed.dart
 .freezed_test.dart
 .freezedtest/
 
 # Dart package build directory
-# Каталог сборки Dart пакета
 /build/
 
 # Dart g.datrt
-# Файлы, создаваемые при использовании g.datrt
 *.g.dart
 
 # Dart pub tool
-# Каталог, создаваемый инструментом pub
 .dart_tool/
 
-
 # VS Code specific
-# Файлы связанные с настройками VS Code
 **/.vscode/
 
 # macOS specific
-# Файл .DS_Store, создаваемый macOS
 **/.DS_Store
 
-# Игнорировать все файлы в каталоге doc/
-# doc/**/*.html
-# doc/**/*.json
-# doc/**/*.css
-# doc/**/*.js
-
 # Symbolication related
-# Файлы связанные с symbolication
 app.*.symbols
 
 # Obfuscation related
-# Файлы связанные с обфускацией
 app.*.map.json
 
 # Android Studio will place build artifacts here
-# Артефакты сборки Android Studio
 /android/app/debug
 /android/app/profile
 /android/app/release
 
 # Android specific
-# Специфичные файлы для Android
 **/android/**/gradle-wrapper.jar
 **/android/**/.gradle
 **/android/captures/
@@ -107,7 +86,6 @@ app.*.map.json
 **/android/**/GeneratedPluginRegistrant.*
 
 # iOS specific
-# Специфичные файлы для iOS
 **/ios/Pods/
 **/ios/Runner.xcworkspace/
 **/ios/.symlinks/
@@ -122,6 +100,15 @@ app.*.map.json
 **/ios/GeneratedPluginRegistrant.*
 
 # Avoid committing pubspec.lock for library packages
-# https://dart.dev/guides/libraries/private-files#pubspeclock.
-# Исключить файл pubspec.lock для библиотек
 pubspec.lock
+# 
+lib/l10n/
+lib/localization/
+lib/l10n/
+lib/localization/
+lib/l10n/
+lib/localization/
+lib/l10n/
+lib/localization/
+lib/l10n/
+lib/localization/

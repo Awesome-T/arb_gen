@@ -34,9 +34,13 @@ $str
 </array>''';
   }
 
+  ///
   /// Checks for the existence of ios and macos folders
+  ///
   /// and updates Info.plist in each of them.
+  ///
   /// [languages] - List of language codes.
+  ///
   static void updPls(String rootPath, List<String> languages) {
     // [rootPath] - Relative path to the project.
     if (!Directory(rootPath).existsSync()) {
@@ -122,7 +126,6 @@ $str
         ..createSync()
         ..writeAsStringSync(buff.toString());
       buff.clear();
-      stdout.write('''File ${file.path} was updated successfully''');
     } on FileSystemException catch (e) {
       throw FileSystemException('$e');
     } on Exception catch (e) {

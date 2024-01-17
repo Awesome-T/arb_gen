@@ -32,7 +32,7 @@ Future<void> main(List<String> arguments) async {
   final parseing = ParserArb(cotnig, arbContent);
   //
   final parsedData = parseing.fromArb;
-  // Преобразует строку в карту, используя метод strToMap.
+  //
   final str = parseing.toSingleStr(parsedData);
   // * config.apiKey and config.translator are configuration parameters
   // * that can be used to create an instance of Translator
@@ -56,27 +56,21 @@ Future<void> main(List<String> arguments) async {
     // Create translated .arb files in the specified output folder.
     await reader.createArb(cotnig.arbDir, item.lang, cotnig.arbName, map);
   }
-
   // * [5] Conditionally Moving Generated Files:
   // * Conditionally move the generated files to the lib folder based on the
   // allAtOnce flag in the configuration.
   if (cotnig.allAtOnce!) await _allAtOnce(cotnig);
-
   // * [6] Completion Message:
   final d = sWatch.elapsed;
   sWatch.stop();
-  stdout.write(
-    '''
-
+  stdout.write('''
 --------------COMPLITE--------------
 it took  ${(d.inMilliseconds * 0.001).toStringAsFixed(2)} sec.
 ------------------------------------
 
-''',
-  );
+''');
 }
 
-///
 ///
 Future<void> _allAtOnce(Config cotnig) async {
   // Update pubspec.yaml
@@ -92,12 +86,13 @@ Future<void> _allAtOnce(Config cotnig) async {
   );
   // Run flutter pub get for generating files
   await runFlutterPubGet();
-
   // Move to lib folder all generated files
   // It would enable that functionality.
   await moveFolderAndFiles(cotnig.lDirName);
   //
   IosUpdater.updPls(Directory.current.path, cotnig.translateTo);
   //
-  createMapWithLangs(cotnig.translateTo);
+  createMapWithLangs(cotnig.translateTo, cotnig.arbName);
+  //
+  await unpateGitIgnore(cotnig.arbDir, cotnig.arbName);
 }

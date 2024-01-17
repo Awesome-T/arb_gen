@@ -65,6 +65,8 @@ abstract class ServiceTranslator {
           return MsTranslator(apiKey);
         case 'openAI':
           return OpenAiTranslator(apiKey);
+        case 'google':
+          return const GoogleTS();
         default:
           throw TranslationCodeException('''
 Code of the translator is not recognized: $type

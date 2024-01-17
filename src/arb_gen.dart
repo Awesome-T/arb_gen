@@ -13,5 +13,4 @@ export 'util/constraints.dart';
 export 'util/errors.dart';
 export 'util/file_reader.dart';
 export 'util/functions.dart';
-export 'util/logr.dart';
 export 'util/pls_updater.dart';

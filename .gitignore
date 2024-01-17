@@ -1,5 +1,4 @@
 # Miscellaneous
-# Исключить все файлы с расширениями
 *.class
 *.log
 *.pyc
@@ -10,35 +9,12 @@
 .history
 .svn/
 migrate_working_dir/
-
-# IntelliJ related
-# Файлы проекта IntelliJ IDEA
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# IntelliJ/Android Studio specific
-# Папка .idea содержит конфигурацию проекта IntelliJ IDEA
-**/*.iml
-**/.idea/
-**/.idea/workspace.xml
-**/.idea/tasks.xml
-**/.idea/dart.xml
-**/.idea/copyright/profiles_config.xml
-**/.idea/modules.xml
-**/.idea/dart-fmt.xml
-**/.idea/vcs.xml
-**/.idea/dataSources.xml
-**/.idea/dataSources.ids
-**/.idea/sqlDataSources.xml
-**/.idea/dynamic.xml
-**/.idea/uiDesigner.xml
-**/.idea/gradle.xml
-**/.idea/libraries
+# 
+*.bak
+#
+main.yaml
 
 # Flutter/Dart/Pub related
-# Файлы связанные с Flutter, Dart и Pub
 # **/doc/api/
 **/ios/Flutter/.last_build_id
 .dart_tool/
@@ -47,84 +23,22 @@ migrate_working_dir/
 .pub-cache/
 .pub/
 /build/
-
-
-# Freezed code generation
-# Файлы, создаваемые при генерации кода с использованием Freezed
-.freezed.dart
-.freezed_test.dart
-.freezedtest/
+# 
+.sh copy/
 
 # Dart package build directory
-# Каталог сборки Dart пакета
 /build/
 
 # Dart g.datrt
-# Файлы, создаваемые при использовании g.datrt
 *.g.dart
 
 # Dart pub tool
-# Каталог, создаваемый инструментом pub
 .dart_tool/
 
 
 # VS Code specific
-# Файлы связанные с настройками VS Code
 **/.vscode/
-
-# macOS specific
-# Файл .DS_Store, создаваемый macOS
-**/.DS_Store
-
-# Игнорировать все файлы в каталоге doc/
-# doc/**/*.html
-# doc/**/*.json
-# doc/**/*.css
-# doc/**/*.js
-
-# Symbolication related
-# Файлы связанные с symbolication
-app.*.symbols
-
-# Obfuscation related
-# Файлы связанные с обфускацией
-app.*.map.json
-
-# Android Studio will place build artifacts here
-# Артефакты сборки Android Studio
-/android/app/debug
-/android/app/profile
-/android/app/release
-
-# Android specific
-# Специфичные файлы для Android
-**/android/**/gradle-wrapper.jar
-**/android/**/.gradle
-**/android/captures/
-**/android/gradlew
-**/android/gradlew.bat
-**/android/local.properties
-**/android/**/GeneratedPluginRegistrant.*
-
-# iOS specific
-# Специфичные файлы для iOS
-**/ios/Pods/
-**/ios/Runner.xcworkspace/
-**/ios/.symlinks/
-**/ios/Flutter/Flutter.framework/
-**/ios/Flutter/Flutter.podspec
-**/ios/Flutter/Flutter.xcconfig
-**/ios/Flutter/App.framework
-**/ios/Flutter/App.podspec
-**/ios/Flutter/App.xcconfig
-**/ios/Flutter/Debug.xcconfig
-**/ios/Flutter/Release.xcconfig
-**/ios/GeneratedPluginRegistrant.*
 
 # Avoid committing pubspec.lock for library packages
 # https://dart.dev/guides/libraries/private-files#pubspeclock.
-# Исключить файл pubspec.lock для библиотек
 pubspec.lock
-
-#
-*.txt

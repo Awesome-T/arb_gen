@@ -151,7 +151,7 @@ class SelectInnerParser implements IInnerParser {
     } on FormatException catch (e) {
       const msg =
           '''FormatException: does not follow valid regular expression syntax.''';
-      stdout.write(msg);
+      stderr.write(msg);
       throw FormatException('$e');
     }
   }
@@ -166,7 +166,7 @@ class SelectInnerParser implements IInnerParser {
     if (!hasOtherKeyword) {
       final msg =
           '''Exception: key ${map.keys.toList()} - argument option must have `${otherKyeWord.toLowerCase()}` keyword clause\b$map''';
-      stdout.write(msg);
+      stderr.write(msg);
       throw IcuParsingException(msg);
     }
   }

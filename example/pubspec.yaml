@@ -13,6 +13,7 @@ dependencies:
     sdk: flutter
   intl:
 dev_dependencies:
+  # arb_gen: ^0.0.3
   arb_gen:
     path: ..
   flutter_test:

@@ -50,7 +50,7 @@ class GoogleTS extends ServiceTranslator {
 
     if (arrays == null) {
       const message = "Error: Can't parse json data";
-      stdout.write(message);
+      stderr.write(message);
       throw const FormatException(message);
     }
 

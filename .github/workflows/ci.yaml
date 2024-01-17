@@ -1,0 +1,183 @@
+name: CI
+
+# имя запусков рабочего процесса, созданное на основе рабочего 
+# процесса, которое будет отображаться в списке запусков рабочего 
+# процесса на вкладке «Действия» вашего репозитория. В этом примере 
+# используется выражение с контекстом github для отображения имени 
+# пользователя актера, который инициировал запуск рабочего процесса.
+run-name: ${{ github.actor }} dart test
+#
+permissions: read-all
+
+on:
+  label:
+    types: 
+      - created
+      - edited
+  push:
+    branches: 
+      - "main"
+      - "dev" 
+    paths-ignore:
+        - '**.md'
+    # Sequence of patterns matched against refs/tags
+    # tags:        
+    #   - v2
+    #   - v1.*
+  pull_request:
+    branches: 
+      - "main"
+      - "dev" 
+    paths-ignore:
+        - '**.md'
+    # types:
+    #    - opened
+    #    - edited
+  issues:
+    types:
+      - opened
+      - labeled
+      - reopened
+
+
+
+# В контексте GitHub Actions, concurrency представляет 
+# собой механизм для управления параллельным выполнением 
+# workflow и предотвращения одновременного выполнения нескольких 
+# экземпляров workflow для одного и того же репозитория или 
+# события.
+concurrency:
+  # group: Определяет группу выполнения workflow.
+  #  Все workflow с одинаковым значением group будут считаться 
+  #  частью одной группы. Это означает, что они будут конкурировать 
+  #  друг с другом для ресурсов и выполнения.
+  group: ${{ github.workflow }}-${{ github.ref }}
+  # cancel-in-progress: Если установлен в true, то GitHub Actions 
+  # будет автоматически отменять предыдущие запущенные workflow с
+  # тем же значением group, когда новый workflow из этой группы 
+  # запускается. Это помогает предотвратить одновременное выполнение 
+  # нескольких workflow и может быть полезно в ситуациях, когда вы 
+  # не хотите, чтобы старые workflow мешали новым.
+  cancel-in-progress: true
+
+
+
+# Определение задач workflow
+jobs:
+  # check-bats-version:
+  # Задача для обнаружения изменений
+  # changes:
+  #   runs-on: ubuntu-latest
+  #   # Проверка, что это не черновик pull request
+  #   if: github.event.pull_request.draft == false
+  #   # Определение выходов для использования в других задачах
+  #   outputs:
+  #       needs_dart_package_checks: ${{ steps.needs_dart_package_checks.outputs.changes }}
+  #   name: 👀 Detect Changes
+  #   steps:
+  #     # Шаг: Checkout репозитория
+  #     - name: 📚 Git Checkout
+  #       uses: actions/checkout@v3
+  #     # Шаг: Использование фильтра для определения изменений 
+  #     # в пакетах Dart
+  #     - uses: dorny/paths-filter@v2
+  #       name: Dart Package Detection
+  #       id: needs_dart_package_checks
+  #       with:
+  #         filters: |
+  #           bloc:
+  #             - ./.github/codecov.yml
+  #             - ./.github/workflows/main.yaml
+  #             - ./.github/actions/dart_package/action.yaml
+  #             - packages/bloc/**
+  # 
+
+  testing:
+    # 
+    runs-on: ubuntu-latest
+    # defaults:
+    #   run:
+    #     # Run everything from within the arb_gen project directory
+    #     working-directory: ./arb_gen
+    steps:
+      - uses: actions/checkout@v4
+    # - uses: actions/first-interaction@v1
+    #   with:
+    #     repo-token: ${{ secrets.GITHUB_TOKEN }}
+    #     issue-message: '# Message with markdown.\nThis is the message that will be displayed on users' first issue.'
+    #     pr-message: 'Message that will be displayed on users' first pr. Look, a `code block` for markdown.'
+
+
+    
+    #  Шаг: Кэширование зависимостей Dart
+    #   Добавлен новый шаг Cache Dart dependencies, который использует
+    #    actions/cache@v2 для кэширования директории ~/.pub-cache, 
+    #    где обычно хранятся зависимости Dart.
+    #   Ключ кэширования вычисляется на основе файлов pubspec.yaml, 
+    #   чтобы убедиться, что кэш будет инвалидирован, если изменятся зависимости.
+    #   Обратите внимание, что кэширование может быть особенно полезным,
+    #    когда у вас большой проект с множеством зависимостей, и вы хотите 
+    #    ускорить процесс установки зависимостей, повторно используя их из кэша 
+    #    при повторных запусках workflow.
+      - name: Cache Dart dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-dart-${{ hashFiles('**/pubspec.yaml') }}
+    #
+      - uses: dart-lang/setup-dart@v1
+
+        with:
+          sdk: ${{ matrix.sdk }}
+    # 1.  Мы перемещаем каталог `example/` во временный каталог `example_temp/`.
+    # 2.  Создаем файл `.gitignore` с содержимым `example/`.
+    # 3.  Используем `git update-index --assume-unchanged`,
+    # чтобы временно проигнорировать изменения в `.gitignore` только для текущего workflow.
+    # Обратите внимание, что использование --assume-unchanged означает, что git не будет 
+    # отслеживать изменения .gitignore для последующих команд, пока вы не снова явно разрешите 
+    # отслеживание с помощью git update-index --no-assume-unchanged. Это предотвращает случайное
+    # добавление .gitignore в индекс в будущем.
+      - name: Exclude example directory
+        run: |
+          mv example/ example_temp/
+          echo "example/" > .gitignore
+          GIT_INDEX_FILE=.git/index git update-index --assume-unchanged .gitignore        
+      # - name: Exclude example directory
+      #   run: |
+      #     mv example/ example_temp/
+      #     echo "example/" >> .gitignore
+      #     git add .gitignore
+      #     git commit -m "Exclude example directory"
+      #     git push origin HEAD    
+      - name: Install dependencies
+        run: dart pub get
+      # Uncomment this step to verify the use of 'dart format' on each commit.
+      # - name: Verify formatting
+      #   run: dart format --output=none --set-exit-if-changed .
+      # Consider passing '--fatal-infos' for slightly stricter analysis.
+      # - name: Analyze project source
+      #   run: dart analyze
+      # Your project will need to have tests in test/ and a dependency on
+      # package:test for this step to succeed. Note that Flutter projects will
+      # want to change this to 'flutter test'.
+      - name: Run tests
+        run: dart test
+      #
+      #  tests run, this will upload your coverage report to Codecov:
+      # - name: Upload coverage reports to Codecov
+      #   uses: codecov/codecov-action@v3
+      #   env:
+      #     CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      
+      # Your project will need to have tests in test/ and a dependency on
+      # package:test for this step to succeed. Note that Flutter projects will
+      # want to change this to 'flutter test'.
+      # - name: Run tests
+      #   run: |
+      #     if [ -d "example" ]; then
+      #       dart test --coverage --exclude example
+      #     else
+      #       dart test --coverage
+      #     fi

@@ -39,44 +39,14 @@ abstract class _IParset<T extends DTArb<dynamic>> {
   /// Separates a concatenated translation string into a list of
   /// individual translations.
   List<String> separeteTranslation(String data) {
-    //This code splits the data string into a list
-    //of substrings using the separator separator.
-    //Then it removes the last element of the list,
-    //replaces all occurrences of the string "|||" in
-    //the last element and trims whitespace. Finally,
-    //it adds the modified last element back to the list.
-    //  final arr = data.split(separator);
-    // final last = arr.last
-    //     .replaceAll(
-    //       RegExp(_SEPARATOR),
-    //       '',
-    //     )
-    //     .trim();
-    // final f = arr
-    //   ..removeLast()
-    //   ..add(last);
-    //   stdout.write(data);
-
-    // Используем регулярное выражение для поиска строк, которые
-    // начинаются с пробелов и заканчиваются новой строкой
     final regex = RegExp(r'(.*\n)|(.*)');
     final matches = regex.allMatches(data).toList();
     final result = <String>[];
     for (var i = 0; i < matches.length; i++) {
       result.add((matches[i].group(0)!).trim());
     }
-    // Извлекаем строки из совпадений
-    // Выводим результат
-    //  stdout.write(result.toString());
-    //.replaceAll(r'\n', replace)
-    // final arrw = data.split(separator)..removeLast();
     return result;
   }
-
-  ///
-  /// Returns a string with [separator], for example, ```someData ||| ```.
-  ///
-  //String strWithSeparator(String data) => '$data$separator';
 }
 
 /// Abstract interface class `IParset`.

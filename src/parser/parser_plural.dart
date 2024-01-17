@@ -168,7 +168,7 @@ class PluralInnerParser implements IInnerParser {
     if (!hasOtherKeyword) {
       final msg =
           '''Exception: key ${fd.keys.toList()} - argument option must have `${otherKyeWord.toLowerCase()}` keyword clause ''';
-      stdout.write(msg);
+      stderr.write(msg);
       throw IcuParsingException(msg);
     }
   }

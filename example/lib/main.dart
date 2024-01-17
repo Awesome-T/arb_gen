@@ -23,7 +23,7 @@ Future<void> main() async => runZonedGuarded(
       },
       (error, stack) => runApp(
         WidgetsApp(
-          color: Color.fromARGB(219, 246, 240, 240),
+         color: Color.fromARGB(219, 246, 240, 240),
           home: ErrorWidget('$error\n$stack'),
         ),
       ),

@@ -1,17 +1,14 @@
 name: arb_gen
 description: "Dart package designed to simplify the translation and localization process in Flutter projects using ARB (Application Resource Bundle) files."
-version: 0.0.3
+version: 0.0.4
 homepage: https://github.com/Awesome-T/arb_gen
 repository: https://github.com/Awesome-T/arb_gen
 issue_tracker: https://github.com/Awesome-T/arb_gen/issues
 documentation: https://github.com/Awesome-T/arb_gen
-
 environment:
   sdk : '>=3.2.4 <4.0.0'
 dependencies:
   collection: ^1.18.0
-  
 dev_dependencies:
   test:
   very_good_analysis: ^5.1.0
-  

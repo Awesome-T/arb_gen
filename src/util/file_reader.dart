@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-
 ///
 ///
 ///
@@ -16,7 +15,7 @@ abstract interface class IFileReader {
   ///
   Map<String, dynamic> loadMapFromFile(String path);
 }
-
+///
 ///
 ///
 class FileReader implements IFileReader {
@@ -40,7 +39,6 @@ class FileReader implements IFileReader {
             (File value) => value.writeAsString(jsonEncode(contents)).then(
               (file) {
                 print('ARB created ${file.path}');
-                //   stdout.write('file created ${file.path}');
                 return;
               },
             ).onError<FileSystemException>((error, stackTrace) => throw error),
