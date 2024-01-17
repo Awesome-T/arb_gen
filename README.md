@@ -156,12 +156,12 @@ mv generated_arb_files/* lib/l10n/
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/fr.png">
+                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/en.png">
                     <img src="assets\en.png" width="225" height=255 />
                 </a>
             </td>
             <td align="center">
-                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/fr.png">
+                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/es.png">
                     <img src="assets\es.png" width="200" height=255 />
                 </a>
             </td>
