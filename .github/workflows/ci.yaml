@@ -182,16 +182,16 @@ jobs:
       #       dart test --coverage
       #     fi
       
-      # - name: Upgrade CHANGELOG and Version
-      #   run: |
-      #    if dart test ; then
-      #     git config --global user.email "hereiscreativecode@gmail.com"
-      #     git config --global user.name "Awesome-T"
-      #     .sh/./update_changelog.sh 
-      #     git add CHANGELOG.md
-      #     git add pubspec.yaml
-      #     git commit  -m "Updete package version [skin ci]"
-      #     git push -f -u origin main   
-      #     else
-      #       echo "Error"
-      #    fi
+      - name: Upgrade CHANGELOG and Version
+        run: |
+         if dart test ; then
+          git config --global user.email "hereiscreativecode@gmail.com"
+          git config --global user.name "Awesome-T"
+          .sh/./update_changelog.sh 
+          git add CHANGELOG.md
+          git add pubspec.yaml
+          git commit  -m "Updete package version [skin ci]"
+          git push -f -u origin main   
+          else
+            echo "Error"
+         fi
