@@ -13,3 +13,12 @@ All notable changes to this project will be documented in this file.
 - Automatically check and add flutter_localizations, intl dependencies to pubspec.yaml
 - Move generated files from .dart_tool directory to the folder specified in the settings.
 - update Info.plist for iOS, macOs.
+
+
+## [0.0.4] - 2024-01-24
+
+### Edited
+ Supported languages, and added an example.
+- the list of languages for localization corresponds to kMaterialSupportedLanguages.
+- an example for a Mac has been falsely added; the file with the localization field is automatically updated.
+- the readme file has been updated.
