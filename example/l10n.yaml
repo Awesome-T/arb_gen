@@ -1,7 +1,7 @@
   # The directory where the template and translated arb files are located.The default is lib/l10n.
   arb-dir: lib/l10n
   template-arb-file: localization_en.arb
-  output-class: AppLocalezation
+  output-class: AppLocalization
   # synthetic_package: false
   # Specifies whether the localizations class getter is nullable.
   nullable-getter: false

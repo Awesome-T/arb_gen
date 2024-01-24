@@ -54,13 +54,17 @@ class ParserArb {
   void validateMap() {
     for (final element in _arbContent.entries) {
       //
-      if (element.key.contains('.'))
+      if (element.key.contains('.')) {
         throw ArbDataException(
-            'ERROR: key is not supported${element.key} contain "." ');
+          'ERROR: key is not supported${element.key} contain "." ',
+        );
+      }
       //
       if (!element.key.startsWith('@') && element.value is! String) {
         throw ArbDataException(
-            'ERROR: value at key ${element.key}  is ${element.value.runtimeType} - not supported');
+          // ignore: avoid_dynamic_calls
+          'ERROR: value at key ${element.key}  is ${element.value.runtimeType} - not supported',
+        );
       }
     }
   }

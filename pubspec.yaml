@@ -11,4 +11,4 @@ dependencies:
   collection: ^1.18.0
 dev_dependencies:
   test:  
-  very_good_analysis: ^5.1.0
+  meta: any

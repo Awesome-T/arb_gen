@@ -1,8 +1,12 @@
-// ignore_for_file: avoid_stdout.write
+// ignore: lines_longer_than_80_chars
+// ignore_for_file: avoid_stdout.write, avoid_bool_literals_in_conditional_expressions, unused_local_variable
 import 'dart:convert';
 import 'dart:io';
 import 'package:collection/collection.dart';
 import 'constraints.dart';
+
+
+
 
 ///
 /// Creates a `l10n.yaml` file based on the provided `Config`.
@@ -22,10 +26,16 @@ Future<void> createL10nyaml(
     if (preferredLanguage != null) codes.add(preferredLanguage);
     final e = !codes.every(
       //  languageMap
-      LANGS.keys.toList().contains,
+      FlutterSupportedLanguages.keys.toList().contains,
     );
     // final e = !codes.every((i) => languageMap.keys.toList().contains(i));
-    if (e) throw Exception('one of tis codes are not supoorted $codes');
+
+    //TODO: code "iw", "he", "jw"
+
+    // https://cloud.google.com/translate/docs/languages
+    // https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
+
+    //if (e) throw Exception('one of tis codes are not supoorted $codes');
     //
     final dir = '${Directory.current.path}/l10n.yaml';
     final file = File(dir);
@@ -49,15 +59,16 @@ Future<void> createL10nyaml(
               return;
             }),
           )
-          .onError((error, stackTrace) {
-        stderr.write('''
+          .onError(
+        (error, stackTrace) {
+          stderr.write('''
 File l10n.yaml ERROR $error
 ''');
-        return;
-      });
-    } else {
-      return;
+          return;
+        },
+      );
     }
+    return;
   } catch (e) {
     final msg = '''
 Exception l10n.yaml NOT CREATEDm$e
@@ -82,7 +93,8 @@ Future<void> upgradePubspec() async {
   final origennArray = List<String>.unmodifiable(lines);
   // *
   final hasLocalization = lines.indexWhere(
-              (i) => i.contains(RegExp('(flutter_localizations:){1}'))) !=
+            (i) => i.contains(RegExp('(flutter_localizations:){1}')),
+          ) !=
           -1
       ? true
       : false;
@@ -97,8 +109,9 @@ Future<void> upgradePubspec() async {
           ? true
           : false;
 // *
-  if (!lines.contains('    sdk: flutter'))
+  if (!lines.contains('    sdk: flutter')) {
     throw Exception('ERROR: pubspec.yaml has no Flutter SDK dependency');
+  }
 
   for (var i = 0; i < lines.length; i++) {
     if (lines[i] == '' || lines[i].startsWith('#')) continue;
@@ -182,7 +195,6 @@ Future<bool> runFlutterPubGet() async {
         result.exitCode,
       );
     }
-    //TODO:
     stdout.write('''
 flutter pub get was finished, all files.
 ''');
@@ -201,13 +213,15 @@ Future<void> moveFolderAndFiles(String outPutFolder) async {
         Directory('${Directory.current.path}/lib/$outPutFolder');
     targetDirectory.existsSync() == true
         ? targetDirectory.deleteSync(recursive: true)
+        // ignore: unnecessary_statements
         : null;
 
     final dartToolGen = '${Directory.current.path}/.dart_tool/flutter_gen';
     final sourceDirectory = Directory(dartToolGen);
 
-    if (!targetDirectory.existsSync())
+    if (!targetDirectory.existsSync()) {
       targetDirectory.createSync(recursive: true);
+    }
 
     final files = sourceDirectory.listSync();
 
@@ -217,7 +231,8 @@ Future<void> moveFolderAndFiles(String outPutFolder) async {
       file.renameSync(newPath);
     }
     await sourceDirectory.delete(recursive: true);
-    stdout.write('''Generated files was moved into 'lib' directory 
+    stdout.write('''
+Generated files was moved into 'lib' directory 
 ''');
   } on PathNotFoundException catch (e) {
     throw PathNotFoundException('$e\n$outPutFolder', const OSError());
@@ -232,15 +247,16 @@ void createMapWithLangs(
 ) {
   //
   final tr = Map<String, Map<String, String>>.fromEntries(
-    LANGS.entries.where((e) => langs.contains(e.key)),
+    FlutterSupportedLanguages.entries.where((e) => langs.contains(e.key)),
   );
 
   final jsonString = jsonEncode(tr);
-  final file = File('${Directory.current.path}/lib/$arbName/langs.g.dart')
+  //final file =
+  File('${Directory.current.path}/lib/$arbName/langs.g.dart')
     ..createSync()
     ..writeAsStringSync('''
 ///
-const LANGS = $jsonString;''');
+const Map<String, Map<String, String>> LANGS = $jsonString;''');
   return;
 }
 
@@ -312,7 +328,7 @@ Future<void> unpateGitIgnore(String arbDir, String arbName) async {
 $arbDir/
 lib/$arbName/''';
 
-    final bool d = lines.indexWhere(
+    final d = lines.indexWhere(
               (i) => i.contains(
                 RegExp(
                   r'$ignored',

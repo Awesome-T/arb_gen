@@ -1,5 +1,8 @@
+// ignore_for_file: lines_longer_than_80_chars
+
 import 'dart:convert';
 import 'dart:io';
+
 ///
 ///
 ///
@@ -15,6 +18,7 @@ abstract interface class IFileReader {
   ///
   Map<String, dynamic> loadMapFromFile(String path);
 }
+
 ///
 ///
 ///
@@ -38,7 +42,11 @@ class FileReader implements IFileReader {
           .then(
             (File value) => value.writeAsString(jsonEncode(contents)).then(
               (file) {
-                print('ARB created ${file.path}');
+                // print('ARB created ${file.path}');
+                //
+                print(
+                  "Arb file's created for ${RegExp(r'([a-zA-Z\-]{0,3})\.arb$').firstMatch(file.path)!.group(1)}.",
+                );
                 return;
               },
             ).onError<FileSystemException>((error, stackTrace) => throw error),

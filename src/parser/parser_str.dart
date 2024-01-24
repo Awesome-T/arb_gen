@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import '../util/errors.dart';
 import 'i_parser.dart';
 import 'types_of_content.dart';
@@ -19,6 +21,7 @@ base class SimpleStrParser extends IParset<StringArb> {
           RegExp(r'\{([^{}]+)\}').allMatches(map.value as String);
       final placeholders = <String>[];
       for (final str in regxPlaceholders) {
+        // ignore: unnecessary_statements
         str.group(1) != null ? placeholders.add(str.group(1)!) : null;
       }
 

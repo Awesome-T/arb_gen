@@ -8,6 +8,7 @@ import 'types_of_content.dart';
 ///
 ///``{count, plural, zero{You have no new messages} one{You have 1 new message} other{You have {count} new messages}}``
 /// * group(1) - count
+// ignore: constant_identifier_names
 const String _R_PLURAL =
     r'{\s*(\w+)\s*,\s*plural,\s*((?:[^{}]+|\{(?:[^{}]+|\{[^{}]*\})*\})*)}';
 
@@ -56,8 +57,6 @@ class PluralParser extends IParset<PuralArb> {
           ? translatedChank.clear()
           : translatedChank.removeRange(0, parsedChank.source.entries.length);
       return arbTranslated;
-    } on RangeError catch (e) {
-      throw RangeError('$e');
     } on Exception catch (e) {
       throw Exception('''$e''');
     }

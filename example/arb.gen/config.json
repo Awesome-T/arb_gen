@@ -4,7 +4,9 @@
       "it",
       "es",
       "de",
-      "fr"
+      "fr",
+      "zh",
+      "ar"
     ],
     "ignored": [
       "appName"
@@ -23,7 +25,7 @@
     "baseLanguage": null,
     "_translater": "optional `null`",
     "translater": null,
-    "_apiKey": "optional ",
+    "_apiKey": "optional",
     "apiKey": null,
     "_allAtOnce": "null",
     "allAtOnce": null

@@ -4,12 +4,16 @@
 ![GH: issues](https://img.shields.io/github/issues/Awesome-T/arb_gen)
 ![GH: PRs](https://img.shields.io/github/issues-pr/Awesome-T/arb_gen)
 ![GH: last commit](https://img.shields.io/github/last-commit/Awesome-T/arb_gen?color=blue&logo=GitHub&style=flat)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](ttps://github.com/Naereen/StrapDown.js/graphs/commit-activity)
+![GitHub Discussions](https://img.shields.io/github/discussions/Awesome-T/arb_gen)
 [![style: lint](https://img.shields.io/badge/style-lint-4BC0F5.svg)](https://pub.dev/packages/lint)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/Awesome-T/arb_gen/blob/dev/LICENSE)
 
 # ARB Gen
 
 ARB Gen is a powerful Dart package tailored for Flutter projects, streamlining the translation and localization processes through ARB (Application Resource Bundle) files. This package automates the generation of translated ARB files, providing a seamless experience for developers and allowing them to concentrate on the translation aspect. Key features include automatic translation from a base language to multiple target languages, effortless integration with Flutter projects, and a flexible configuration setup that accommodates customization through a configuration file or command line arguments. ARB Gen also supports dynamic updates, allowing Flutter apps to receive new translations without requiring manual intervention. Developers can easily install the package by adding a dependency to their pubspec.yaml file and running flutter pub get. With straightforward usage steps and clear integration instructions, ARB Gen enhances the localization workflow, making it efficient and developer-friendly.
+
+![!\[Alt text\](assets/arb_gen-1706034100144.gif)](assets/example.gif)
 
 ## Features
 
@@ -168,3 +172,7 @@ mv generated_arb_files/* lib/l10n/
         </tr>
     </tbody>
 </table>
+
+## Maintainers
+
+- [@Awesome-T](https://github.com/Awesome-T)

@@ -5,7 +5,6 @@
 /// - [SelectArb] for ICU select keyword
 /// - [PuralArb] for ICU plural keyword
 /// - [StringArb] for simple string
-///// [DtArrayStrSource] for an array of strings
 sealed class DTArb<T> {
   const DTArb(this.source, this.placeholders);
 

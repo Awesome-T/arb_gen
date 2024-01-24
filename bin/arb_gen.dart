@@ -67,7 +67,6 @@ Future<void> main(List<String> arguments) async {
 --------------COMPLITE--------------
 it took  ${(d.inMilliseconds * 0.001).toStringAsFixed(2)} sec.
 ------------------------------------
-
 ''');
 }
 
@@ -94,5 +93,5 @@ Future<void> _allAtOnce(Config cotnig) async {
   //
   createMapWithLangs(cotnig.translateTo, cotnig.arbName);
   //
-  await unpateGitIgnore(cotnig.arbDir, cotnig.arbName);
+  //await unpateGitIgnore(cotnig.arbDir, cotnig.arbName);
 }

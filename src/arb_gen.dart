@@ -7,7 +7,7 @@ export 'parser/core_parser.dart';
 export 'parser/parser_plural.dart';
 export 'parser/parser_select.dart';
 export 'parser/parser_str.dart';
-export 'translanor/i_translator.dart';
+export 'translator/i_translator.dart';
 export 'util/config.dart';
 export 'util/constraints.dart';
 export 'util/errors.dart';

@@ -1,8 +1,7 @@
-import 'package:example/core/localization_/presentation/pages/home_page.dart';
-import 'package:example/core/localization_/presentation/notifier.dart';
+import 'package:example/core/localyze/presentation/notifier.dart';
+import 'package:example/core/localyze/presentation/pages/home_page.dart';
+import 'package:example/localization/localization.g.dart';
 import 'package:flutter/material.dart';
-
-import 'localization/localization.g.dart';
 
 ///
 ///
@@ -15,12 +14,12 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) => MaterialApp(
-        supportedLocales: AppLocalezation.supportedLocales,
-        localizationsDelegates: AppLocalezation.localizationsDelegates,
+        supportedLocales: AppLocalization.supportedLocales,
+        localizationsDelegates: AppLocalization.localizationsDelegates,
         localeListResolutionCallback: (_, __) =>
             InhLNotifier.of(context).locate,
         localeResolutionCallback: (_, __) => InhLNotifier.of(context).locate,
         locale: InhLNotifier.of(context).locate,
-        home: HomePage(),
+        home: const HomePage(),
       );
 }

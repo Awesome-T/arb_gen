@@ -81,7 +81,8 @@ $str
 
     // Find the index of 'CFBundleLocalizations' in Info.plist
     final localizationsIndx = lines.indexWhere(
-        (String i) => i.contains(RegExp('<key>CFBundleLocalizations</key>')));
+      (String i) => i.contains(RegExp('<key>CFBundleLocalizations</key>')),
+    );
     final hasLocalizations = localizationsIndx != -1;
 
     if (hasLocalizations) {

@@ -1,4 +1,4 @@
-// ignore_for_file: directives_ordering, lines_longer_than_80_chars
+// ignore_for_file: directives_ordering, lines_longer_than_80_chars, constant_identifier_names
 
 import 'dart:io';
 
@@ -55,7 +55,10 @@ base class SelectPaser extends IParset<SelectArb> {
           parsedChank.source.entries.map((e) => e.key).toList().cast<String>();
       // *
       final toVariants = _selectInnerParser.toVariants(
-          translatedSublist, parsedChank.placeholders ?? [], keys);
+        translatedSublist,
+        parsedChank.placeholders ?? [],
+        keys,
+      );
       // *
       final translatedArbKey =
           '{${parsedChank.placeholders?.first}, ${IcuKeyWord.select.name},$toVariants}';
@@ -127,7 +130,8 @@ class SelectInnerParser implements IInnerParser {
   ///
   @override
   ({List<String> placeholders, Map<String, String> source}) parceInnerData(
-      String data) {
+    String data,
+  ) {
     try {
       final match = RegExp(patern).firstMatch(data);
       // final String firstPlaceholder = match!.group(1)!;
@@ -174,8 +178,11 @@ class SelectInnerParser implements IInnerParser {
   ///
   /// `toArb()`
   ///
-  String toVariants(List<String> translatedSublist, List<String> placeholders,
-      List<String> keys) {
+  String toVariants(
+    List<String> translatedSublist,
+    List<String> placeholders,
+    List<String> keys,
+  ) {
     try {
       final buff = StringBuffer();
       for (var y = 0; y < translatedSublist.length; y++) {

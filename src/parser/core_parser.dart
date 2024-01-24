@@ -1,3 +1,4 @@
+// ignore: depend_on_referenced_packages
 import 'package:meta/meta.dart';
 
 import '../util/config.dart';
@@ -53,6 +54,7 @@ abstract interface class _ParserArbQ {
       //
       if (!element.key.startsWith('@') && element.value is! String) {
         throw ArbDataException(
+          // ignore: avoid_dynamic_calls
           'ERROR: value at key ${element.key}  is ${element.value.runtimeType} - not supported',
         );
       }

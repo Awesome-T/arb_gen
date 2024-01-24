@@ -1,4 +1,4 @@
-// ignore_for_file: inference_failure_on_collection_literal
+// ignore_for_file: inference_failure_on_collection_literal, lines_longer_than_80_chars
 import 'package:collection/collection.dart';
 import 'package:test/test.dart';
 import '../../../src/parser/parser_arb.dart';
@@ -59,7 +59,7 @@ void main() {
         'date': {
           'type': 'DateTime',
           'format': 'EEE, M/d/y',
-          'isCustomDateFormat': 'true'
+          'isCustomDateFormat': 'true',
         },
       },
     },
@@ -88,7 +88,7 @@ void main() {
     'singleString': 'This is just a normal string.',
     '@singleString': {
       'context': 'views:Home page',
-      'description': 'Comment for the single string.'
+      'description': 'Comment for the single string.',
     },
     'datePickerMinuteOne': '1 minute',
     'datePickerMinuteOther': r'$minute minutes',
@@ -111,7 +111,7 @@ void main() {
     'formLabelDone': 'Done',
     '@formLabelDone': {
       'description':
-          'Label being displayed below every form field that is filled and valid'
+          'Label being displayed below every form field that is filled and valid',
     },
 
     'remove_all_done_dialog_body':
@@ -133,14 +133,14 @@ void main() {
             'decimalDigits': 2,
             'name': 'USD',
             'symbol': r'$',
-            'customPattern': '¤#0.00'
+            'customPattern': '¤#0.00',
           },
         },
         'date': {
           'type': 'DateTime',
           'format': 'yMd',
           'example': '11/10/2021',
-          'description': 'Balance date'
+          'description': 'Balance date',
         },
       },
     },
@@ -198,7 +198,7 @@ void main() {
 
     'commonLoading': 'Loading...',
     '@commonLoading': {
-      'description': 'Loading message displayed during data retrieval'
+      'description': 'Loading message displayed during data retrieval',
     },
 
     'pageLoginButton': 'Login',
