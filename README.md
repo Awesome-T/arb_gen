@@ -1,4 +1,5 @@
 [![Pub package](https://img.shields.io/pub/v/arb_gen.svg)](https://pub.dev/packages/arb_gen)
+[![GH: WiKi](https://img.shields.io/badge/FAQ-90e22b)](https://github.com/Awesome-T/arb_gen/wiki/FAQ)
 [![CI](https://github.com/Awesome-T/arb_gen/actions/workflows/ci.yaml/badge.svg)](https://github.com/Awesome-T/arb_gen/actions)
 [![Pub likes](https://badgen.net/pub/likes/arb_gen)](https://pub.dev/packages/arb_gen)
 ![GH: issues](https://img.shields.io/github/issues/Awesome-T/arb_gen)
