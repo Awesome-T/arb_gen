@@ -1,0 +1,78 @@
+name: CI
+run-name: ${{ github.workflow_ref }}  test ${{ github.repository }}
+
+permissions:
+  contents: write
+
+on:
+  label:
+    types:
+      - created
+      - edited
+  push:
+    branches:
+      - "main"
+      - "dev"
+      - "master"
+    # types:
+    #    - opened
+    #    - edited
+  issues:
+    types:
+      - opened
+      - labeled
+      - reopened
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  testing:
+
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+
+      - uses: actions/checkout@v4
+      
+      - name: Config Git
+        run: |
+          git config --global user.email "hereiscreativecode@gmail.com"
+          git config --global user.name "$GITHUB_REPOSITORY_OWNER"
+
+      - name: Cache Dart dependencies
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.pub-cache
+          key: ${{ runner.os }}-dart-${{ hashFiles('**/pubspec.yaml') }}
+
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
+ 
+      - name: Exclude example directory
+        run: |
+          mv example/ example_temp/
+          echo "example/" > .gitignore
+          GIT_INDEX_FILE=.git/index git update-index --assume-unchanged .gitignore
+  
+      - name: Install dependencies
+        run: dart pub get
+ 
+      - name: Run tests
+        run: dart test
+
+      - name: Upgrade version and CHANGELOG
+        run: |
+          .github/upgrade_version.sh
+          git add pubspec.yaml
+          .github/update_changelog.sh
+          git add CHANGELOG.md
+          git commit  -m "Updete changelog [skin ci]"
+          git push -f -u origin master
