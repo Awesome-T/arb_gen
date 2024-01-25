@@ -54,7 +54,7 @@ migrate_working_dir/
 /build/
 
 # Dart g.datrt
-*.g.dart
+# *.g.dart
 
 # Dart pub tool
 .dart_tool/

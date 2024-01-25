@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleLocalizations</key>
-	<array>
+    <array>
         <string>en</string>
         <string>it</string>
         <string>es</string>
