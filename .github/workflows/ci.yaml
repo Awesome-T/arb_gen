@@ -1,5 +1,5 @@
 name: CI
-run-name: ${{ github.workflow_ref }}  test ${{ github.repository }}
+run-name: CI testing and update version and CHANGELOG
 
 permissions:
   contents: write
