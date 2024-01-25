@@ -44,6 +44,8 @@ jobs:
         run: |
           git config --global user.email "hereiscreativecode@gmail.com"
           git config --global user.name "$GITHUB_REPOSITORY_OWNER"
+          git update-index --chmod=+x ./.github/update_changelog.sh
+          git update-index --chmod=+x ./.github/upgrade_version.sh
 
       - name: Cache Dart dependencies
         uses: actions/cache@v2
