@@ -29,7 +29,7 @@ main.yaml
 /build/
 
 # Dart g.datrt
-*.g.dart
+# *.g.dart
 
 # Dart pub tool
 .dart_tool/
