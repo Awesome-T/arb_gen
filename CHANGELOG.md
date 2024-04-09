@@ -22,3 +22,6 @@ All notable changes to this project will be documented in this file.
 - the list of languages for localization corresponds to kMaterialSupportedLanguages.
 - an example for a Mac has been falsely added; the file with the localization field is automatically updated.
 - the readme file has been updated.
+
+## [0.0.5] - 2024-04-09
+Fixed an bug in determining the source file path specified in the preferences.
