@@ -36,25 +36,23 @@ class FileReader implements IFileReader {
     String langCode,
     String arbName,
     Map<dynamic, dynamic> contents,
-  ) async =>
-      File('$outputFolder/${arbName}_$langCode.arb')
-          .create(recursive: true)
-          .then(
-            (File value) => value.writeAsString(jsonEncode(contents)).then(
-              (file) {
-                // print('ARB created ${file.path}');
-                //
-                print(
-                  "Arb file's created for ${RegExp(r'([a-zA-Z\-]{0,3})\.arb$').firstMatch(file.path)!.group(1)}.",
-                );
-                return;
-              },
-            ).onError<FileSystemException>((error, stackTrace) => throw error),
-          )
-          .onError<PathExistsException>((error, stackTrace) {
-        stderr.write('error $error');
-        throw error;
-      });
+  ) async {
+    final path = <String>[
+      outputFolder,
+      '${arbName}_$langCode.arb',
+    ].join(
+      Platform.pathSeparator,
+    );
+    final file = await File(path).create(recursive: true);
+    await file.writeAsString(jsonEncode(contents)).then((_) {
+      stdout.writeln(
+        "Arb file's created for ${RegExp(r'([a-zA-Z\-]{0,3})\.arb$').firstMatch(file.path)!.group(1)}.",
+      );
+    }).onError((error, trace) {
+      stderr.write('error $error');
+      throw Exception(error);
+    });
+  }
 
   /// Interface which returns content file for builder
   /// and configuration for this

@@ -1,5 +1,5 @@
-import 'package:example/core/localyze/presentation/notifier.dart';
-import 'package:example/core/localyze/presentation/pages/home_page.dart';
+import 'package:example/core/localization/presentation/notifier.dart';
+import 'package:example/core/localization/presentation/pages/home_page.dart';
 import 'package:example/localization/localization.g.dart';
 import 'package:flutter/material.dart';
 
@@ -14,8 +14,8 @@ class App extends StatefulWidget {
 class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) => MaterialApp(
-        supportedLocales: AppLocalization.supportedLocales,
-        localizationsDelegates: AppLocalization.localizationsDelegates,
+        supportedLocales: L.supportedLocales,
+        localizationsDelegates: L.localizationsDelegates,
         localeListResolutionCallback: (_, __) =>
             InhLNotifier.of(context).locate,
         localeResolutionCallback: (_, __) => InhLNotifier.of(context).locate,

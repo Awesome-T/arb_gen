@@ -1,5 +1,5 @@
-import 'package:example/core/localyze/presentation/notifier.dart';
-import 'package:example/core/localyze/presentation/pages/lang_select.dart';
+import 'package:example/core/localization/presentation/notifier.dart';
+import 'package:example/core/localization/presentation/pages/lang_select.dart';
 import 'package:example/localization/localization.g.dart';
 import 'package:flutter/material.dart';
 
@@ -38,13 +38,13 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text(AppLocalization.of(context).appName),
+          title: Text(L.of(context).appName),
           leading: FittedBox(
             child: IconButton(
               icon: Row(
                 children: [
                   const Icon(Icons.language),
-                  Text(AppLocalization.of(context).localeName),
+                  Text(L.of(context).localeName),
                 ],
               ),
               onPressed: () async => Navigator.of(context).push(
@@ -69,9 +69,9 @@ class _HomePageState extends State<HomePage> {
                           'Lang',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        Text('code: ${AppLocalization.of(context).localeName}'),
+                        Text('code: ${L.of(context).localeName}'),
                         Text(
-                          'language ${InhLNotifier.of(context).langs[AppLocalization.of(context).localeName]!.keys.first}',
+                          'language ${InhLNotifier.of(context).langs[L.of(context).localeName]!.keys.first}',
                         ),
                         const Divider(),
                       ],
@@ -87,7 +87,7 @@ class _HomePageState extends State<HomePage> {
                           'Not translated',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        Txt(AppLocalization.of(context).appName),
+                        Txt(L.of(context).appName),
                       ],
                     ),
                   ),
@@ -101,8 +101,8 @@ class _HomePageState extends State<HomePage> {
                           'Translated',
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
-                        Txt(AppLocalization.of(context).pageLoginPassword),
-                        Txt(AppLocalization.of(context).pageLoginUsername),
+                        Txt(L.of(context).pageLoginPassword),
+                        Txt(L.of(context).pageLoginUsername),
                       ],
                     ),
                   ),
@@ -117,8 +117,7 @@ class _HomePageState extends State<HomePage> {
                           style: Theme.of(context).textTheme.headlineSmall,
                         ),
                         Txt(
-                          AppLocalization.of(context)
-                              .postCreatedInfo(DateTime.now()),
+                          L.of(context).postCreatedInfo(DateTime.now()),
                         ),
                       ],
                     ),
@@ -150,8 +149,7 @@ class _HomePageState extends State<HomePage> {
                                 child: ValueListenableBuilder(
                                   valueListenable: _controllerSelect1,
                                   builder: (_, value, __) => Txt(
-                                    AppLocalization.of(context)
-                                        .commonVehicleType(value.text),
+                                    L.of(context).commonVehicleType(value.text),
                                   ),
                                 ),
                               ),
@@ -176,7 +174,8 @@ class _HomePageState extends State<HomePage> {
                                 child: ValueListenableBuilder(
                                   valueListenable: _controllerSelect2,
                                   builder: (_, value, __) => Txt(
-                                    AppLocalization.of(context)
+                                    L
+                                        .of(context)
                                         .pageHomeWelcomeRole(value.text),
                                   ),
                                 ),
@@ -217,10 +216,9 @@ class _HomePageState extends State<HomePage> {
                                 valueListenable: _controllerSelect3,
                                 builder: (_, value, __) {
                                   return Txt(
-                                    AppLocalization.of(context)
-                                        .remove_all_done_dialog_body(
-                                      int.tryParse(value.text) ?? 0,
-                                    ),
+                                    L.of(context).remove_all_done_dialog_body(
+                                          int.tryParse(value.text) ?? 0,
+                                        ),
                                   );
                                 },
                               ),
@@ -247,10 +245,11 @@ class _HomePageState extends State<HomePage> {
                               child: ValueListenableBuilder(
                                 valueListenable: _controllerSelect4,
                                 builder: (___, value, __) => Txt(
-                                  AppLocalization.of(context)
+                                  L
+                                      .of(context)
                                       .roomUnavailableContactOrganiserDialogCount(
-                                    int.tryParse(value.text) ?? 0,
-                                  ),
+                                        int.tryParse(value.text) ?? 0,
+                                      ),
                                 ),
                               ),
                             ),

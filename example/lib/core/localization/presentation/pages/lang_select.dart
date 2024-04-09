@@ -1,4 +1,4 @@
-import 'package:example/core/localyze/presentation/notifier.dart';
+import 'package:example/core/localization/presentation/notifier.dart';
 import 'package:example/localization/localization.g.dart';
 import 'package:flutter/material.dart';
 
@@ -97,8 +97,7 @@ class _LangSelectState extends State<LangSelect> {
                       final e = value.entries.toList()[i];
                       return RadioListTile<Locale>(
                         value: Locale(e.key),
-                        groupValue:
-                            Locale(AppLocalization.of(context).localeName),
+                        groupValue: Locale(L.of(context).localeName),
                         onChanged: (_) async {
                           await InhLNotifier.of(context)
                               .updateLocalization(e.key);

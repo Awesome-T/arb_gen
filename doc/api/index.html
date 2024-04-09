@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, user-scalable=no">
-  <meta name="generator" content="made with love by dartdoc 8.0.3">
   <meta name="description" content="arb_gen API docs, for the Dart programming language.">
   <title>arb_gen - Dart API docs</title>
 
@@ -12,7 +11,7 @@
   
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
   
   <link rel="stylesheet" href="static-assets/github.css?v1">
   <link rel="stylesheet" href="static-assets/styles.css?v1">
@@ -35,14 +34,14 @@
   <form class="search navbar-right" role="search">
     <input type="text" id="search-box" autocomplete="off" disabled class="form-control typeahead" placeholder="Loading search...">
   </form>
-  <div class="toggle" id="theme-button">
+  <div class="toggle" id="theme-button" title="Toggle brightness">
     <label for="theme">
       <input type="checkbox" id="theme" value="light-theme">
       <span id="dark-theme-button" class="material-symbols-outlined">
-        brightness_4
+        dark_mode
       </span>
       <span id="light-theme-button" class="material-symbols-outlined">
-        brightness_5
+        light_mode
       </span>
     </label>
   </div>
@@ -53,14 +52,19 @@
       
 <section class="desc markdown">
   <p><a href="https://pub.dev/packages/arb_gen"><img src="https://img.shields.io/pub/v/arb_gen.svg" alt="Pub package"></a>
+<a href="https://github.com/Awesome-T/arb_gen/wiki/FAQ"><img src="https://img.shields.io/badge/FAQ-90e22b" alt="GH: WiKi"></a>
+<a href="https://github.com/Awesome-T/arb_gen/actions"><img src="https://github.com/Awesome-T/arb_gen/actions/workflows/ci.yaml/badge.svg" alt="CI"></a>
 <a href="https://pub.dev/packages/arb_gen"><img src="https://badgen.net/pub/likes/arb_gen" alt="Pub likes"></a>
-<a href="https://github.com/Awesome-T/arb_gen/actions/workflows/dart.yml"><img src="https://github.com/Awesome-T/arb_gen/actions/workflows/dart.yml/badge.svg" alt="Dart Test"></a>
-<a href="https://github.com/Awesome-T/arb_gen/actions"><img src="https://github.com/Baseflow/flutter-geocoding/workflows/Geocoding/badge.svg" alt="Buid status"></a>
-<a href="https://github.com/Awesome-T/arb_gen/blob/dev/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a>
-<a href="https://pub.dev/packages/lint"><img src="https://img.shields.io/badge/style-lint-4BC0F5.svg" alt="style: lint"></a></p>
+<img src="https://img.shields.io/github/issues/Awesome-T/arb_gen" alt="GH: issues">
+<img src="https://img.shields.io/github/issues-pr/Awesome-T/arb_gen" alt="GH: PRs">
+<img src="https://img.shields.io/github/last-commit/Awesome-T/arb_gen?color=blue&amp;logo=GitHub&amp;style=flat" alt="GH: last commit">
+<a href="ttps://github.com/Naereen/StrapDown.js/graphs/commit-activity"><img src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" alt="Maintenance"></a>
+<img src="https://img.shields.io/github/discussions/Awesome-T/arb_gen" alt="GitHub Discussions">
+<a href="https://pub.dev/packages/lint"><img src="https://img.shields.io/badge/style-lint-4BC0F5.svg" alt="style: lint"></a>
+<a href="https://github.com/Awesome-T/arb_gen/blob/dev/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="License: MIT"></a></p>
 <h1 id="arb-gen">ARB Gen</h1>
-<!-- ARB Gen is a Dart package designed to simplify the translation and localization process in Flutter projects using ARB (Application Resource Bundle) files. It automates the generation of translated ARB files, allowing you to focus on the translation itself. -->
 <p>ARB Gen is a powerful Dart package tailored for Flutter projects, streamlining the translation and localization processes through ARB (Application Resource Bundle) files. This package automates the generation of translated ARB files, providing a seamless experience for developers and allowing them to concentrate on the translation aspect. Key features include automatic translation from a base language to multiple target languages, effortless integration with Flutter projects, and a flexible configuration setup that accommodates customization through a configuration file or command line arguments. ARB Gen also supports dynamic updates, allowing Flutter apps to receive new translations without requiring manual intervention. Developers can easily install the package by adding a dependency to their pubspec.yaml file and running flutter pub get. With straightforward usage steps and clear integration instructions, ARB Gen enhances the localization workflow, making it efficient and developer-friendly.</p>
+<p><img src="assets/example.gif" alt="![Alt text](assets/arb_gen-1706034100144.gif)"></p>
 <h2 id="features">Features</h2>
 <ul>
 <li><strong>Automatic Translation:</strong> Translate your content from a base language to multiple target languages with ease.</li>
@@ -71,29 +75,99 @@
 <h2 id="installation">Installation</h2>
 <p>Add the following dependency to your <code>pubspec.yaml</code> file:</p>
 <pre class="language-yaml"><code class="language-yaml">dev_dependencies:
-  arb_gen: ^0.0.3
+  arb_gen:
 </code></pre>
 <p>Then, run:</p>
 <pre class="language-bash"><code class="language-bash">flutter pub get
 </code></pre>
 <h2 id="usage">Usage</h2>
-<h4 id="1-configuration">1. Configuration</h4>
-<p>Create a configuration file arb.gen/config.json or use command line arguments to specify translation settings. Here's an example configuration file:</p>
+<h3 id="1-configuration">1. Configuration</h3>
+<p>Create a configuration file arb.gen/config.json. Here's an example configuration file:</p>
 <pre class="language-json"><code class="language-json">{
   "translateTo": ["fr", "es"],
-  "ignored": ["keyToIgnore"],
+  "ignored": ["appName"],
   "pathToFile": "arb.gen/content.json",
   "outputFolder": "lib/l10n/",
   "arbName": "localization",
   "baseLanguage": "en",
-  "translater": "google",
-  "apiKey": "YOUR_TRANSLATION_API_KEY",
+  "translater": null,
+  "apiKey":null,
   "allAtOnce": true
 }
 </code></pre>
+<p>Note: by default we prefer google translator, this aproach dont need any API-key,
+if field <code>translater</code> it'lll the same as 'google' .</p>
+<p>Output directory for all generated .arb files. Defaults to 'lib/l10n'.</p>
+<h4 id="s">s</h4>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>translateTo</td>
+<td>List<string></string></td>
+<td>Codes of languages for which localization is required.</td>
+</tr>
+<tr>
+<td>preferredLanguage</td>
+<td>String?</td>
+<td>Preferred language code; if <code>null</code>, it defaults to the first language in <code>translateTo</code>.</td>
+</tr>
+<tr>
+<td>baseLanguage</td>
+<td>String?</td>
+<td>Code of the original language used in the base file.</td>
+</tr>
+<tr>
+<td>ignored</td>
+<td>List<string></string></td>
+<td>Keys from the card that don't need to be transferred. Usually, these are custom keys (e.g., the application name).</td>
+</tr>
+<tr>
+<td>outputClass</td>
+<td>String?</td>
+<td>Name of the output class for localization. Defaults to <code>class $L{}</code>.</td>
+</tr>
+<tr>
+<td>lDirName</td>
+<td>String</td>
+<td>Path to the local service folder. Defaults to <code>/lib/$outPutFolder</code>.</td>
+</tr>
+<tr>
+<td>arbName</td>
+<td>String</td>
+<td>Name for .arb files; follows the pattern <code>arbName_languageCode.arb</code>.</td>
+</tr>
+<tr>
+<td>translater</td>
+<td><code>'deepl', 'yandex', 'google', 'azure', 'microsoft', 'openAI'</code></td>
+<td>The name of the service to be translated. Defaults to Google Translator</td>
+</tr>
+<tr>
+<td>apiKey</td>
+<td>String?</td>
+<td>API key for the translation service. Not required for Google Translator.</td>
+</tr>
+<tr>
+<td>allAtOnce</td>
+<td>bool?</td>
+<td>Flag to generate all translations at once. Defaults to <code>true</code>.</td>
+</tr>
+<tr>
+<td>pathToFile</td>
+<td>String</td>
+<td>Path to the original .arb/.json file. Defaults to 'arb.gen/content.json'.</td>
+</tr>
+</tbody>
+</table>
 <h3 id="2-run-arb-gen">2. Run ARB Gen</h3>
 <p>Run the following command to execute the translation process:</p>
-<pre class="language-bash"><code class="language-bash">dart run arb.gen.dart
+<pre class="language-bash"><code class="language-bash">dart run arb_gen
 </code></pre>
 <h3 id="3-integration-with-flutter">3. Integration with Flutter</h3>
 <p>If allAtOnce is set to false in your configuration, follow these steps to integrate the generated translations into your Flutter project:</p>
@@ -104,7 +178,7 @@
 dependencies:
   flutter_localizations:
     sdk: flutter
-  intl: ^0.17.0
+  intl:
 </code></pre>
 <h4 id="32-create-l10nyaml">3.2 Create l10n.yaml</h4>
 <pre class="language-yaml"><code class="language-yaml">arb-dir: lib/l10n
@@ -121,6 +195,51 @@ output-localization-file: app_localizations.dart
 </code></pre>
 <h4 id="35-updating-the-ios-app-bundle">3.5 Updating the iOS app bundle</h4>
 <p><a href="https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization#localizing-for-ios-updating-the-ios-app-bundle">See the documentation on the website.</a></p>
+<h4 id="translated-example">Translated example</h4>
+<table>
+    <tbody>
+        <tr>
+            <td align="center">
+                <b> DE 
+            </b></td>
+            <td align="center">
+                <b> FR 
+            </b></td>
+            <td align="center">
+                <b> EN 
+            </b></td>
+            <td align="center">
+                <b> ES 
+            </b></td>
+        </tr>
+        <tr>
+            <td align="center">
+                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/de.png">
+                    <img src="assets\de.png" width="225" height="255">
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/fr.png">
+                    <img src="assets\fr.png" width="225" height="255">
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/en.png">
+                    <img src="assets\en.png" width="225" height="255">
+                </a>
+            </td>
+            <td align="center">
+                <a href="https://github.com/Awesome-T/arb_gen/blob/main/assets/es.png">
+                    <img src="assets\es.png" width="200" height="255">
+                </a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+<h2 id="maintainers">Maintainers</h2>
+<ul>
+<li><a href="https://github.com/Awesome-T">@Awesome-T</a></li>
+</ul>
 </section>
 
 
@@ -160,7 +279,7 @@ output-localization-file: app_localizations.dart
 <footer>
   <span class="no-break">
     arb_gen
-      0.0.3
+      0.0.5
   </span>
 
   

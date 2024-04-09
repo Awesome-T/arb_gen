@@ -2,11 +2,10 @@
 // ignore_for_file: avoid_stdout.write, avoid_bool_literals_in_conditional_expressions, unused_local_variable
 import 'dart:convert';
 import 'dart:io';
+
 import 'package:collection/collection.dart';
+
 import 'constraints.dart';
-
-
-
 
 ///
 /// Creates a `l10n.yaml` file based on the provided `Config`.
@@ -24,51 +23,41 @@ Future<void> createL10nyaml(
     final codes = <String>[langCode];
     // *
     if (preferredLanguage != null) codes.add(preferredLanguage);
-    final e = !codes.every(
-      //  languageMap
-      FlutterSupportedLanguages.keys.toList().contains,
-    );
-    // final e = !codes.every((i) => languageMap.keys.toList().contains(i));
-
-    //TODO: code "iw", "he", "jw"
-
-    // https://cloud.google.com/translate/docs/languages
-    // https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
-
-    //if (e) throw Exception('one of tis codes are not supoorted $codes');
-    //
-    final dir = '${Directory.current.path}/l10n.yaml';
-    final file = File(dir);
+    const l10n = 'l10n.yaml';
+    final e = !codes.every(FlutterSupportedLanguages.keys.toList().contains);
+    final path =
+        <String>[Directory.current.path, l10n].join(Platform.pathSeparator);
+    final file = File(path);
     final isExists = file.existsSync();
-    if (!isExists) {
-      return await file
-          .create()
-          .then(
-            (file) => file
-                .writeAsString(
-              _StringsSo.l10nFile1(
-                arbName,
-                langCode,
-                outputClass,
-                nameOfFileLocalization,
-                preferredLanguage,
-              ),
-            )
-                .then((_) {
-              stdout.write('File l10n.yaml created');
-              return;
-            }),
+    if (isExists) file.deleteSync();
+
+    return await file
+        .create(recursive: true)
+        .then(
+          (file) => file
+              .writeAsString(
+            _StringsSo.l10nFile(
+              arbName,
+              langCode,
+              outputClass,
+              nameOfFileLocalization,
+              preferredLanguage,
+            ),
           )
-          .onError(
-        (error, stackTrace) {
-          stderr.write('''
-File l10n.yaml ERROR $error
-''');
-          return;
-        },
-      );
-    }
-    return;
+              .then((_) {
+            stdout.write('File $l10n created');
+            return;
+          }),
+        )
+        .onError(
+      (error, stackTrace) {
+        final msg = '''
+File $l10n ERROR $error
+''';
+        stderr.write(msg);
+        throw Exception(msg);
+      },
+    );
   } catch (e) {
     final msg = '''
 Exception l10n.yaml NOT CREATEDm$e
@@ -78,13 +67,16 @@ Exception l10n.yaml NOT CREATEDm$e
   }
 }
 
-///
 /// Upgrades the `pubspec.yaml` file by adding necessary dependencies
 /// related to localization (flutter_localizations, intl) and code generation.
 /// Also adds the `generate: true` flag.
 Future<void> upgradePubspec() async {
   // *
-  final yamlPath = '${Directory.current.path}/pubspec.yaml';
+  final yamlPath = <String>[
+    Directory.current.path,
+    'pubspec.yaml',
+  ].join(Platform.pathSeparator);
+
   // *
   final pubspecFile = File(yamlPath);
   // *
@@ -177,7 +169,6 @@ No need to update pubspec.yaml
   }
 }
 
-///
 /// Runs `flutter pub get` command and returns `true`
 /// if successful, `false` otherwise.
 Future<bool> runFlutterPubGet() async {
@@ -188,17 +179,21 @@ Future<bool> runFlutterPubGet() async {
     runInShell: true,
   ).then((ProcessResult result) {
     if (result.exitCode != 0) {
+      stderr.write('''
+flutter pub get was finished, all files.
+exitCode ${result.exitCode}
+stderr ${result.stderr}
+''');
+
       throw ProcessException(
         'flutter ',
         arguments,
         '${result.stderr}',
         result.exitCode,
       );
+    } else {
+      return true;
     }
-    stdout.write('''
-flutter pub get was finished, all files.
-''');
-    return true;
   });
 }
 
@@ -209,14 +204,15 @@ flutter pub get was finished, all files.
 ///
 Future<void> moveFolderAndFiles(String outPutFolder) async {
   try {
-    final targetDirectory =
-        Directory('${Directory.current.path}/lib/$outPutFolder');
+    final path = <String>[Directory.current.path, 'lib', outPutFolder]
+        .join(Platform.pathSeparator);
+    final targetDirectory = Directory(path);
     targetDirectory.existsSync() == true
         ? targetDirectory.deleteSync(recursive: true)
-        // ignore: unnecessary_statements
         : null;
 
-    final dartToolGen = '${Directory.current.path}/.dart_tool/flutter_gen';
+    final dartToolGen = [Directory.current.path, '.dart_tool', 'flutter_gen']
+        .join(Platform.pathSeparator);
     final sourceDirectory = Directory(dartToolGen);
 
     if (!targetDirectory.existsSync()) {
@@ -227,7 +223,10 @@ Future<void> moveFolderAndFiles(String outPutFolder) async {
 
     for (final file in files) {
       if (file.path.endsWith('.yaml')) continue;
-      final newPath = '${targetDirectory.path}/${file.uri.pathSegments.last}';
+      final newPath = [
+        targetDirectory.path,
+        file.uri.pathSegments.last,
+      ].join(Platform.pathSeparator);
       file.renameSync(newPath);
     }
     await sourceDirectory.delete(recursive: true);
@@ -241,23 +240,28 @@ Generated files was moved into 'lib' directory
 
 ///
 ///
-void createMapWithLangs(
-  List<String> langs,
-  String arbName,
-) {
+void createMapWithLangs(List<String> langs, String lDirName) {
   //
-  final tr = Map<String, Map<String, String>>.fromEntries(
-    FlutterSupportedLanguages.entries.where((e) => langs.contains(e.key)),
-  );
+  try {
+    final tr = Map<String, Map<String, String>>.fromEntries(
+      FlutterSupportedLanguages.entries.where((e) => langs.contains(e.key)),
+    );
 
-  final jsonString = jsonEncode(tr);
-  //final file =
-  File('${Directory.current.path}/lib/$arbName/langs.g.dart')
-    ..createSync()
-    ..writeAsStringSync('''
-///
-const Map<String, Map<String, String>> LANGS = $jsonString;''');
-  return;
+    final jsonString = jsonEncode(tr);
+    final path = <String>[
+      Directory.current.path,
+      'lib',
+      lDirName,
+      'langs.g.dart',
+    ].join(Platform.pathSeparator);
+    File(path)
+      ..createSync(recursive: true)
+      ..writeAsStringSync('''
+  ///
+  const Map<String, Map<String, String>> LANGS = $jsonString;''');
+  } on Exception catch (e) {
+    throw Exception('$e');
+  }
 }
 
 ///
@@ -282,9 +286,7 @@ class _StringsSo {
 
   ///
   /// lDirName `localization.dart` file
-  ///
-  ///
-  static String l10nFile1(
+  static String l10nFile(
     String arbName,
     String langCode,
     String? outputClass,
@@ -295,6 +297,7 @@ class _StringsSo {
   # The directory where the template and translated arb files are located.The default is lib/l10n.
   arb-dir: lib/l10n
   template-arb-file: ${arbName}_$langCode.arb
+
   output-class: ${outputClass ?? r'$L'}
   # synthetic_package: false
   # Specifies whether the localizations class getter is nullable.
@@ -302,8 +305,13 @@ class _StringsSo {
   # When specified, the dart format command is run after generating the localization files.
   format: true
   # untranslated-messages-file: untranslated.json
+
+  # Whether to use deferred loading for different locale 
+  # localization classes, used on Flutter Web only
   use-deferred-loading: false
   # output-localization-file: l10n.dart
+
+  # Filename of your result Dart file
   output-localization-file: $className.g.dart''';
     final b = '''\n  preferred-supported-locales:\n    - $preferredLanguage''';
     if (preferredLanguage != null) {

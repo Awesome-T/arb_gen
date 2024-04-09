@@ -1,5 +1,5 @@
-import 'package:example/core/localyze/repo/localization_repo.dart';
-import 'package:example/core/localyze/repo/params.dart';
+import 'package:example/core/localization/repo/localization_repo.dart';
+import 'package:example/core/localization/repo/params.dart';
 import 'package:flutter/widgets.dart';
 
 ///

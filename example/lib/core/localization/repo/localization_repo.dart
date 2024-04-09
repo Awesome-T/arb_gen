@@ -1,7 +1,7 @@
 import 'dart:io';
 
-import 'package:example/core/localyze/repo/lds/localize_ilds.dart';
-import 'package:example/core/localyze/repo/params.dart';
+import 'package:example/core/localization/repo/lds/localize_ilds.dart';
+import 'package:example/core/localization/repo/params.dart';
 import 'package:example/localization/langs.g.dart';
 import 'package:flutter/foundation.dart';
 

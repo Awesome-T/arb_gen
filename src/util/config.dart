@@ -1,7 +1,9 @@
 // ignore_for_file: lines_longer_than_80_chars
 
 import 'dart:io';
+
 import 'package:collection/collection.dart';
+
 import 'constraints.dart';
 import 'errors.dart';
 
@@ -23,12 +25,10 @@ import 'errors.dart';
 // kMaterialSupportedLanguages|
 // kWidgetsSupportedLanguages
 
-///
-///
-///
 class Config {
   //
   Config._({
+    required this.pathToFile,
     required this.outputClass,
     required this.translateTo,
     required this.ignored,
@@ -47,15 +47,19 @@ class Config {
   factory Config.load(Map<String, dynamic> data) {
     try {
       return Config._(
+        pathToFile: data['pathToFile'] as String,
         preferredLanguage: data['preferredLanguage'] as String?,
-        translateTo: List<String>.from(data['translateTo'] as List)..map((e) => e.toLowerCase()).toSet().toList(),
-        ignored: data['ignored'] == null ? <String>[] : List<String>.from(data['ignored'] as List),
-        lDirName: (data['localization'] as String?) ?? 'localization',
+        translateTo: List<String>.from(data['translateTo'] as List)
+          ..map((e) => e.toLowerCase()).toSet().toList(),
+        ignored: data['ignored'] == null
+            ? <String>[]
+            : List<String>.from(data['ignored'] as List),
+        lDirName: (data['lDirName'] as String?) ?? 'localization',
+        arbName: data['arbName'] as String? ?? 'localization',
+        outputClass: (data['outputClass'] as String?) ?? r'$L',
         baseLanguage: data['baseLanguage'] as String?,
         translater: data['translater'] as String?,
         apiKey: data['apiKey'] as String?,
-        arbName: data['arbName'] as String? ?? 'localization',
-        outputClass: (data['outputClass'] as String?) ?? r'$L',
         allAtOnce: data['allAtOnce'] as bool? ?? true,
       );
     } on FormatException catch (e, t) {
@@ -83,18 +87,17 @@ class Config {
   final List<String> ignored;
 
   /// Name of output class localization.
-  ///
   /// * by default `class $L{}`
   final String? outputClass;
 
-  /// path to the local service folder
-  ///
-  /// * `/lib/$outPutFolder`
-  ///
+  /// The name of the directory where all dart localization
+  /// files will reside.
+  /// * by default `localization`
+  /// * `lib/localization`
   final String lDirName;
 
-  /// name for .arb files
-  ///  ```arbName```_languageCode.arb
+  /// Filename for the source .arb files after translating.
+  /// All files are located in the l10n directory.
   final String arbName;
 
   /// The name of the service to be translated.
@@ -117,23 +120,25 @@ class Config {
   final bool? allAtOnce;
 
   /// - pathToOriginSource: path to the original .arb/.json file,
-  ///  * for example "arb.gen/content.json"
-  String get pathToFile => 'arb.gen/content.json';
+  ///  * for example "arb.gen/foo/content.json"
+  final String pathToFile;
 
-  /// output directory for all generated .arb files
-  /// default foldeer for all .arb files  'lib/l10n'
+  /// Directory where the .arb files will be stored.
   String get arbDir => 'lib/l10n';
 
   ///
+  static const _initFolder = 'arb.gen';
+
   ///
+  static const nameOfConfigFile = 'config.json';
+
+  /// Get the list of language codes.
   List<String> langs([
     Map<String, Map<String, String>> languageMap = FlutterSupportedLanguages,
-  ]) {
-    return languageMap.keys.toList();
-  }
+  ]) =>
+      languageMap.keys.toList();
 
-  /// This method is doing a good job of validating the configuration,
-  /// ensuring that essential parameters are correctly set.
+  /// Check the configuration settings and content.
   void _chekSettingsAndContent() {
     checkTargetLangs(langs());
     checkApiKeyOfService();
@@ -142,58 +147,61 @@ class Config {
     chechNameOfOutClass();
   }
 
-  /// check  field `outputClass`
-  ///
+  /// Check the field `outputClass`.
   ///   * ``^[a-zA-Z\D]{1}[_AZaz\S\d+]{0,}$``
   ///   * `outputClass != null`
-  ///
   void chechNameOfOutClass() {
-    if (outputClass != null && !RegExp(r'^[a-zA-Z\D]{1}[_AZaz\S\d+]{0,}$', unicode: true).hasMatch(outputClass!)) {
+    if (outputClass != null &&
+        !RegExp(r'^[a-zA-Z\D]{1}[_AZaz\S\d+]{0,}$', unicode: true)
+            .hasMatch(outputClass!)) {
       final msg = '`outputClass` name $outputClass is incorrect';
       stderr.write(msg);
       throw ConfigArgException(msg);
     }
   }
 
-  ///
+  /// Check the path to the file.
   /// * extension must be .json or .arb
-  /// * "pathToFile": "arb.gen/content.json",
   void checkPathToFile() {
-    if (!RegExp(r'.*\.(JSON|json|arb|ARB)$', unicode: true).hasMatch(pathToFile)) {
+    if (!RegExp(r'.*\.(JSON|json|arb|ARB)$', unicode: true)
+        .hasMatch(pathToFile)) {
       final msg = 'extesion must be .json or .arb $pathToFile';
       stderr.write(msg);
       throw FileSystemException(msg);
     }
   }
 
-  ///
-  ///
-  ///
+  /// Check the .arb name.
   void checkArbName() {
     if (!RegExp(r'^[a-zA-Z]{1,}$', unicode: true).hasMatch(arbName)) {
-      final msg = 'name of file  is not correct $arbName';
+      final msg = 'name of file  is not correct $arbName\n';
       stderr.write(msg);
       throw ConfigArgException(msg);
     }
   }
 
-  ///
+  /// Check the API key of the service.
   void checkApiKeyOfService() {
-    final notEqual = apiKey.runtimeType != translater.runtimeType;
+    final notEqual = apiKey != translater;
     if (notEqual) {
-      const msg = 'Both properties (apiKey and translater) must be specified or be null.';
+      const msg =
+          'Both properties (apiKey and translater) must be specified or be null.';
       stderr.write(msg);
       throw const ConfigArgException(msg);
     }
   }
 
-  ///  Если массив `_langCodes` длиннее, и тебе необходимо проверить,
-  /// * что все элементы массива `translateTo` содержатся в массиве `_langCodes`
+  /// Check the target languages.
+  /// -  If the `_langCodes` array is longer, and you need to verify that
+  /// -  all elements of the `translateTo` array are contained in the `_langCodes` array.
   void checkTargetLangs(List<String> suppurtedLangCodes) {
-    final isNotConfirmCodes = !translateTo.toSet().every(suppurtedLangCodes.contains);
+    final isNotConfirmCodes =
+        !translateTo.toSet().every(suppurtedLangCodes.contains);
     if (isNotConfirmCodes) {
-      final notSypportedCodes = translateTo.whereNot(suppurtedLangCodes.contains).toList();
-      final msg = 'Exeprion: some language codes are wrong : $notSypportedCodes\n';
+      final notSypportedCodes =
+          translateTo.whereNot(suppurtedLangCodes.contains).toList();
+      final msg =
+          'Exeprion: some language codes are wrong : $notSypportedCodes\n';
       stderr.write(msg);
 
       throw ConfigArgException(msg);
@@ -210,7 +218,8 @@ class Config {
       !suppurtedLangCodes.contains(preferredLanguage)
           ? msg =
               'Error preferredLanguage: $preferredLanguage  is not valid and this code must be in `translateTo` array'
-          : msg = 'Error preferredLanguage: $preferredLanguage must be in `translateTo` array';
+          : msg =
+              'Error preferredLanguage: $preferredLanguage must be in `translateTo` array';
       stderr.write(msg);
       throw ConfigArgException(msg);
     }
@@ -225,29 +234,22 @@ class Config {
   /// directory where settings and content for
   /// translation are located. ```arb.gen```
   static final Directory _inDint = Directory(
-    '${Directory.current.path}/arb.gen',
+    <String>[Directory.current.path, _initFolder].join(
+      Platform.pathSeparator,
+    ),
   );
 
-  ///
-  static final File _confog = File(
-    '${_inDint.path}/config.json',
+  /// Configuration file.
+  static final File _configFile = File(
+    <String>[
+      _inDint.path,
+      nameOfConfigFile,
+    ].join(
+      Platform.pathSeparator,
+    ),
   );
 
-  ///
   /// folder and config are exists
-  ///
-  static bool get isFileCofigExist => _inDint.existsSync() && _confog.existsSync();
+  static bool get isFileCofigExist =>
+      _inDint.existsSync() && _configFile.existsSync();
 }
-
-
-// void main(List<String> args) {
-//   final isNotConfirmCodes = !LangsTranslationService.keys.toSet().every(FlutterSupportedLanguages.keys.contains);
-//   if (isNotConfirmCodes) {
-//     final notSypportedCodes = LangsTranslationService.keys.whereNot(FlutterSupportedLanguages.keys.contains).toList();
-//   final y=  LangsTranslationService.entries.takeWhile((value) =>
-//         !notSypportedCodes.contains(  value.key),
-//     );
-//     final msg = 'Exeprion: some language codes are wrong : $notSypportedCodes\n$y';
-//     stderr.write(msg);
-//   }
-// }

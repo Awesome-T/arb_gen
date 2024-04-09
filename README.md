@@ -84,7 +84,7 @@ if field `translater` it'lll the same as 'google' .
 Run the following command to execute the translation process:
 
 ```bash
-dart run arb.gen.dart
+dart run arb_gen
 ```
 
 ### 3. Integration with Flutter

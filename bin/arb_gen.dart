@@ -75,7 +75,7 @@ Future<void> _allAtOnce(Config cotnig) async {
   // Update pubspec.yaml
   // There's a commented-out section related to updating pubspec.yaml
   await upgradePubspec();
-  // Creating l10n.yaml
+  //*  Creating l10n.yaml
   await createL10nyaml(
     cotnig.arbName,
     cotnig.translateTo.first,
@@ -91,7 +91,7 @@ Future<void> _allAtOnce(Config cotnig) async {
   //
   IosUpdater.updPls(Directory.current.path, cotnig.translateTo);
   //
-  createMapWithLangs(cotnig.translateTo, cotnig.arbName);
+  createMapWithLangs(cotnig.translateTo, cotnig.lDirName);
   //
   //await unpateGitIgnore(cotnig.arbDir, cotnig.arbName);
 }
